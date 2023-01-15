@@ -1,0 +1,21 @@
+
+
+.footer{
+    background-color: #282c34;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
+}
+.sites{
+    width:45%;
+}
+.address{
+    width:45%;
+}
+.footer p{
+    font-weight: 30;
+    color:azure;
+}
