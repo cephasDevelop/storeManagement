@@ -17,6 +17,7 @@ function App() {
     <NavBar />
       <Routes>
         <Route path='/' element={<Home />}/>
+        <Route path='/admin' element={<AdminHome />}/>
         <Route path='data-in' element={<Form />} />
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
