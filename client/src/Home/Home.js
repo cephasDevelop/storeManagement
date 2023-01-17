@@ -19,18 +19,13 @@ const Home = () => {
   return (
     <Container>
         <Grow in>
-            <Container>
-                <Grid container justify='space-between' spacing={ 3}>
-                      <Grid item display='flex' justify="space-between" xs={12} sm={12} >
-                        {!items.length ? <CircularProgress/>:(items.map((item) => (
-                            <Item key={item._id} item={item} />
+          <Grid container justify='space-between' xs={12} sm={ 12} spacing={1} style={{minHeight:'100vh'} }>
+                        {!items.length ? <CircularProgress/>:(items.map((item,idx) => (
+                        <Grid key={item._id} item justify="space-between" xs={6} sm={3}>
+                          <Item key={idx} item={item} />
+                        </Grid>
                         )))}
-                    </Grid>
-                      {/* <Grid item xs={12} sm={3}>
-                        <FormItem/>
-                    </Grid> */}
-                </Grid>
-            </Container>
+          </Grid>
         </Grow>
     </Container>
   )

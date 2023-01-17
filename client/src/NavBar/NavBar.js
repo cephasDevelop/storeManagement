@@ -4,14 +4,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Search, SearchIconWrapper, StyledInputBase } from '../styleApp.js';
 
-// import { NavLink } from 'react-router-dom';
-// import logo from '../../public/images/someItemPhotos/logo-2.png';
-// import logo from '../images/someItemPhotos/logo-2.png';
+
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/sisayLogoOnly.jpg';
 
 const NavBar = () => {
-  const logo = '#';
+  
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -35,10 +34,10 @@ const NavBar = () => {
             aria-label="menu"
             sx={{ mr: 2 }} onClick={() => navigate('/')}
           >
-            <img className="logo-img" alt="Medea-logo" src={logo } />
+            <img className="logo-img" alt="K.Mikedem-logo" src={logo } />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Medea Products.Plc
+            K.Mikedem General Import & Export Enterprise.
           </Typography>
           <Search>
             <SearchIconWrapper>
