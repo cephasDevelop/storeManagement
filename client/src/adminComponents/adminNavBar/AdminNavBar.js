@@ -1,8 +1,8 @@
 import React from "react";
-import "adminNavBar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import "./adminNavBar.css";
+import { NotificationsNone, Language, Settings } from "@mui/icons-material";
 
-export default function Topbar() {
+const AdminNavBar = () => {
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -27,3 +27,5 @@ export default function Topbar() {
     </div>
   );
 }
+
+export default AdminNavBar;

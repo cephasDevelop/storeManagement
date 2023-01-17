@@ -13,7 +13,7 @@ const Login = () => {
     });
     const handleSubmit = (e) => { 
         e.preventDefault();
-        navigate('/signUp');
+        navigate('/admin');
     }
   return (
     <Container>

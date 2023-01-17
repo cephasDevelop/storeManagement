@@ -10,6 +10,7 @@ import Form from './FormItem/FormItem.js';
 import Login from './Login/Login.js';
 import ShowData from './ShowData/ShowData';
 import SignUp from './SignUp/SignUp';
+import Administrator from './Administrator/Administrator.js';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
     <NavBar />
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/admin' element={<AdminHome />}/>
+        <Route path='admin' element={<Administrator />}/>
         <Route path='data-in' element={<Form />} />
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
