@@ -2,7 +2,8 @@ import Chart from "../../adminComponents/adminChart/Chart";
 import FeaturedInfo from "../../adminComponents/featuredInfo/FeaturedInfo";
 import "./adminHome.css";
 import { userData } from "../../dummyData";
-import WidgetLg from "../../adminComponents/widgetLg/widgetLg";
+import WidgetTransaction from "../../adminComponents/widgetTransaction/WidgetTransaction";
+import WidgetUsers from "../../adminComponents/widgetUsers/WidgetUsers";
 
 const AdminHome = () => {
   return (
@@ -10,7 +11,8 @@ const AdminHome = () => {
       <FeaturedInfo />
       <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>
       <div className="homeWidgets">
-        <WidgetLg/>
+        <WidgetUsers />
+        <WidgetTransaction/>
       </div>
     </div>
   );
