@@ -1,7 +1,9 @@
 import React from 'react';
 import "./administrator.css";
-import AdminNavBar from "../AdminComponents/AdminNavBar/AdminNavBar.js";
-import AdminSideBar from "../AdminComponents/AdminSideBar/AdminSideBar.js";
+import AdminNavBar from '../adminComponents/adminNavBar/AdminNavBar';
+import AdminSideBar from '../adminComponents/AdminSideBar/AdminSideBar';
+import AdminHome from '../adminPages/adminHome/AdminHome';
+
 
 
 const Administrator = () => {
@@ -9,9 +11,9 @@ const Administrator = () => {
     <React.Fragment>
       <AdminNavBar/>
       <div className='container'>
-        <AdminSideBar />
+        <AdminSideBar/>
         <div className="others">
-          Other pages
+          <AdminHome />
         </div>
       </div>
     </React.Fragment>
