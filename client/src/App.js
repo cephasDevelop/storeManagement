@@ -8,8 +8,9 @@ import Home from './Home/Home.js';
 import NavBar from './NavBar/NavBar.js';
 import Form from './FormItem/FormItem.js';
 import Login from './Login/Login.js';
-import ShowData from './ShowData/ShowData';
-import SignUp from './SignUp/SignUp';
+import ShowData from './ShowData/ShowData.js';
+import SignUp from './SignUp/SignUp.js';
+// import Admin from './Admin/Admin.js';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
         <Route path='signUp' element={ <SignUp/>}/>
+        {/* <Route path='adminPage' element={ <Admin/>}/> */}
       </Routes>
     <Footer />
     </React.Fragment>

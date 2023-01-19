@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import itemRoutes from './routes/items.js';
+import loginRoutes from './routes/login.js';
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,10 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use('/api/items/', itemRoutes);
 app.use('/api/form/', itemRoutes);
+
+app.use('/api/login/', loginRoutes);
+app.use('/api/signupforadmin/',loginRoutes);
+
 
 const PORT = process.env.PORT||8000;
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})

@@ -28,6 +28,10 @@ const UserSchema = mongoose.Schema({
         required: true,
         min: 4,
         max:15,
+    },
+    startedOn: {
+        type: String,
+        default: new Date().toISOString(),
     }
 });
 
