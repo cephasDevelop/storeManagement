@@ -21,14 +21,14 @@ const FormItem = () => {
     dispatch(postItem(postItems));
     handleClear();
   }
-  const handleFile = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.addEventListener('load', () => {
-      setPostItems({...postItems,image:reader.result});
-    });
-  }
+  // const handleFile = (e) => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.addEventListener('load', () => {
+  //     setPostItems({...postItems,image:reader.result});
+  //   });
+  // }
   
   return (
     <Container>

@@ -14,14 +14,7 @@ const initialState = {
 export const loginUser = createAsyncThunk('user/loginUser', async (loginData, { rejectWithValue}) => {
     try {
         console.log('userData for login from frontend - ', loginData);
-        //--------------------------------
-        // N.B - await IS REMOVED SHALL TAKE INTO CONSIDERATION ??
         const response = await logIn(loginData);
-        //--------------------------------
-        // THIS IS AWORKING API
-        // const response = await axios.post(`${url}login`, loginData);
-        //--------------------------------
-
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
