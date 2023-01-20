@@ -22,6 +22,7 @@ const departmentNames = [
 
 
 const Login = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,6 +51,7 @@ const Login = () => {
   //   navigate('/adminPage');
   // },[dispatch]);
   
+
   return (
     <Container>
       <Grow in>
