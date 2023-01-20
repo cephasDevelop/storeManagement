@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { logIn } from '../../api/index.js';
 
 // import axios from 'axios';
-// import { url} from '../../api/index.js'
 // const url = 'http://localhost:5000/api/';
 
 const initialState = {
@@ -11,17 +10,10 @@ const initialState = {
     error: ''
 };
 
-export const loginUser = createAsyncThunk('user/loginUser', async (loginData, { rejectWithValue}) => {
+export const loginUser = createAsyncThunk('user/loginUser', async(loginData, { rejectWithValue}) => {
     try {
-        console.log('userData for login from frontend - ', loginData);
-        //--------------------------------
-        // N.B - await IS REMOVED SHALL TAKE INTO CONSIDERATION ??
+        // console.log('userData for login from frontend - ', loginData);
         const response = await logIn(loginData);
-        //--------------------------------
-        // THIS IS AWORKING API
-        // const response = await axios.post(`${url}login`, loginData);
-        //--------------------------------
-
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
