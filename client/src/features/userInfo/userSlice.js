@@ -11,10 +11,11 @@ const initialState = {
     error: ''
 };
 
-export const loginUser = createAsyncThunk('user/loginUser', async (loginData, { rejectWithValue}) => {
+export const loginUser = createAsyncThunk('user/loginUser', async ({loginData,navigate}, { rejectWithValue}) => {
     try {
-        console.log('userData for login from frontend - ', loginData);
         const response = await logIn(loginData);
+        // NAVIGATE AFTER SERVER AND DATA-BASE RESPONSE
+        if (response.data.result.department === 'admin') navigate('/admin');
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
