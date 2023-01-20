@@ -1,3 +1,7 @@
+.adminHome {
+  display: flex;
+}
+
 .home {
   flex: 4;
 }

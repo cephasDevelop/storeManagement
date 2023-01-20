@@ -1,3 +1,7 @@
+.adminProductList {
+  display: flex;
+}
+
 .productList {
   flex: 4;
   height: 75vh;

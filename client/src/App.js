@@ -23,15 +23,15 @@ function App() {
     <NavBar />
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='admin' element={<Administrator />}/>
+        {/* <Route path='admin' element={<Administrator />}/> */}
         <Route path='data-in' element={<Form />} />
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
         <Route path='signUp' element={ <SignUp/>}/>
         <Route path='products' element={ <ProductList/>}/>
         <Route path='product/:productId' element={ <Product/>}/>
-        <Route path='newProduct' element={ <FormItem/>}/>
-        {/* <Route exact path="/admin/home" element={<AdminHome />} /> */}
+        <Route path='newProduct' element={ <NewProduct/>}/>
+        <Route path="admin" element={<AdminHome />} />
       </Routes>
     <Footer />
     </React.Fragment>

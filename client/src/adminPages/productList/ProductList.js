@@ -4,6 +4,8 @@ import { DeleteOutline } from "@mui/icons-material";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
+import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
 
 const ProductList = () => {
   const [data, setData] = useState(productRows);
@@ -59,14 +61,18 @@ const ProductList = () => {
   ];
 
   return (
-    <>    
-      <div className="productTitleContainer">
+    <>
+      <AdminNavBar />
+      <div className="adminProductList">
+        <AdminSideBar />       
+        
+      <div className="productList">
+        <div className="productTitleContainer">
           <h1 className="productTitle">Products List</h1>
           <Link to="/newproduct">
             <button className="productAddButton">Add</button>
           </Link>
         </div>
-      <div className="productList">
         <DataGrid
           rows={data}
           disableSelectionOnClick
@@ -75,6 +81,8 @@ const ProductList = () => {
           checkboxSelection
         />
       </div>
+      </div>   
+      
     </>
   );
 }
