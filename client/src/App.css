@@ -9,6 +9,10 @@
   border-radius: 50%;
 }
 
+.nav-container{
+  margin-bottom: 10px;
+  color:#2c1838;
+}
 
 .link {
   text-decoration: none;

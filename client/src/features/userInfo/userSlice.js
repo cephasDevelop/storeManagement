@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { logIn } from '../../api/index.js';
 
 // import axios from 'axios';
-// import { url} from '../../api/index.js'
 // const url = 'http://localhost:5000/api/';
 
 const initialState = {
@@ -11,11 +10,10 @@ const initialState = {
     error: ''
 };
 
-export const loginUser = createAsyncThunk('user/loginUser', async ({loginData,navigate}, { rejectWithValue}) => {
+export const loginUser = createAsyncThunk('user/loginUser', async(loginData, { rejectWithValue}) => {
     try {
+        // console.log('userData for login from frontend - ', loginData);
         const response = await logIn(loginData);
-        // NAVIGATE AFTER SERVER AND DATA-BASE RESPONSE
-        if (response.data.result.department === 'admin') navigate('/admin');
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
