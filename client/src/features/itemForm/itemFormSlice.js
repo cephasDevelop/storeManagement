@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { url} from '../../api/index.js'
+import { createData } from '../../api/index.js';
+
+// import axios from 'axios';
+// import { url} from '../../api/index.js'
 // const url = 'http://localhost:5000/api/';
 
 const initialState = {
@@ -18,7 +20,9 @@ const initialState = {
 
 export const postItem = createAsyncThunk('itemForm/postItem', async(form, { rejectWithValue}) => {
     try {
-        const response = await axios.post(`${url}form`, form);
+        // const response = await axios.post(`${url}form`, form);
+        const response = await createData(form);
+
         return response.data;
     } catch (error) {
         console.log("postForm actions api .... error")

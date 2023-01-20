@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { url} from '../../api/index.js'
+import { getData } from '../../api/index.js';
+
+// import axios from 'axios';
+// import { url} from '../../api/index.js'
 // const url = 'http://localhost:5000/api/';
 
 const initialState = {
@@ -18,7 +20,8 @@ const initialState = {
 
 export const fetchItems = createAsyncThunk('item/fetchItems', async (_, { rejectWithValue}) => {
     try {
-        const response = await axios.get(`${url}items`);
+        // const response = await axios.get(`${url}items`);
+        const response = await getData();
         return response.data;
     } catch (error) {
         console.log("fetchItems actions api .... error")

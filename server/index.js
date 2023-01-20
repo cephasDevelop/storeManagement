@@ -1,10 +1,11 @@
 import express from 'express';
-// import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';// not required
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
 import itemRoutes from './routes/items.js';
+import loginRoutes from './routes/login.js';
 
 dotenv.config();
 const app = express();
@@ -16,9 +17,11 @@ app.use(cors());
 app.use(express.json({limit:"50mb",extended:true}));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-
 app.use('/api/items/', itemRoutes);
 app.use('/api/form/', itemRoutes);
+
+app.use('/api/login/', loginRoutes);
+app.use('/api/signupforadmin/',loginRoutes);
 
 
 const PORT = process.env.PORT||8000;

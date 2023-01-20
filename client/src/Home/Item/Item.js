@@ -4,7 +4,7 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 const Item = ({item}) => {
   return (
-    <Card elevation={ 6} xs={6} sm={4} sx={{maxWidth: 200, margin:1}}>
+    <Card elevation={ 6} xs={6} sm={3} style={{margin:0, maxHeight:220}}>
       <CardMedia
               component="img"
               alt={ item.name}
@@ -12,8 +12,8 @@ const Item = ({item}) => {
               image={ item.image}
       />
       <CardContent>
-        <Typography gutterBottom variant="body2" color="text.secondary">{`Item: ${item.name}` }</Typography>
-        <Typography variant="body2" color="text.secondary">{ `Price: ${item.sellingPrice} ETB`}</Typography>
+        <Typography gutterBottom variant="body2" color="text.secondary">{`${item.name}` }</Typography>
+        <Typography variant="body2" color="red">{ `${item.sellingPrice} ETB`}</Typography>
       </CardContent>
     </Card>
   )
