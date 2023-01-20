@@ -8,7 +8,11 @@ export const login = async (req, res) => {
     try {
         const { firstName, department, email, password } = req.body;
         console.log('the requested data - ', req.body);
-        const user = await UserInfo.findOne({department:department,email:email,firstName:firstName});
+        let user;
+        // TO:DO MAKE AGUSTMENTS FOR ALL DEPARTMENTS
+        if (department == 'admin') { 
+            user = await UserInfo.findOne({ department: department, email: email, firstName: firstName });
+        }
         if (!user.department) return res.status(404).json({ message: 'User does not exist.' });    
         console.log('found the user fron DB - ', user);
         const isPasswordCorrect = await bcrypt.compare(password,user.password);

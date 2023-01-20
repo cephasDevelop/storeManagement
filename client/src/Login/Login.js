@@ -25,12 +25,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [loginData,setLoginData] = useState({
-      firstName:'',
-      department: '',
-      email: '',
-      password:''
-  });
+  const [loginData, setLoginData] = useState({ firstName: '', department: '', email: '', password: '' });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClearInfo = () => setLoginData({ firstName: '', department: '', email: '', password: '' });
@@ -49,6 +45,7 @@ const Login = () => {
     dispatch(loginUser(loginData));
     handleClearInfo();
   }
+  
   // useEffect(() => { 
   //   navigate('/adminPage');
   // },[dispatch]);

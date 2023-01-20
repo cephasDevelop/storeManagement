@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const login = async (req, res, next) => {
+const loginMiddle = async (req, res, next) => {
     try {
         const head = req.headers.Authorization;
         console.log('req.headers.Authorization = > ',head);
@@ -23,4 +23,4 @@ const login = async (req, res, next) => {
         console.log(error.message);
     }
 }
-export default login;
+export default loginMiddle;

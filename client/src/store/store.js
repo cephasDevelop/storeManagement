@@ -9,7 +9,7 @@ const store = configureStore({
     reducer: {
         item: itemReducer,
         formItem: formReducer,
-        user: userReducer,
+        userInfo: userReducer,
     }
 });
 
