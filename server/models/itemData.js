@@ -2,9 +2,14 @@ import mongoose from 'mongoose';
 
 const ItemSchema = mongoose.Schema({
     idNumber: String,
-    name: {
+    productName: {
         type: String,
         required: true,
+        min:2,
+        max:100,
+    },
+    productType: {
+        type: String,
         min:2,
         max:100,
     },
@@ -16,7 +21,13 @@ const ItemSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    purchasedPrice: Number,
+    description: {
+        type: String,
+        default:"",
+    },
+    productID: Number,
+    modelNo: Number,
+    purchasePrice: Number,
     sellingPrice: Number,
     qty: Number,
     requestedQty: Number,

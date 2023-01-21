@@ -12,7 +12,7 @@ const Item = ({item}) => {
               image={ item.image}
       />
       <CardContent>
-        <Typography gutterBottom variant="body2" color="text.secondary">{`${item.name}` }</Typography>
+        <Typography gutterBottom variant="body2" color="text.secondary">{`${item.productName}` }</Typography>
         <Typography variant="body2" color="red">{ `${item.sellingPrice} ETB`}</Typography>
       </CardContent>
     </Card>

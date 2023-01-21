@@ -15,9 +15,10 @@ export const getItems = async (req, res) => {
 export const createItems = async (req, res) => { 
 
     try {
-        const { name, purchasedPrice, sellingPrice, qty, image } = req.body;
-        let form = new ItemData({ name, purchasedPrice, sellingPrice, qty, image });
+        const { productID, productType, productName, modelNo, description, purchasePrice, sellingPrice, qty, image, stock } = req.body;
+        let form = new ItemData({ productID, productType, productName, modelNo, description, purchasePrice, sellingPrice, qty, image, stock });
         form = await form.save();
+        // console.log("My form data is:", form);
         res.status(201).send(form);
     } catch (error) {
         res.status(409).send({message:error.message});
