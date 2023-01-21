@@ -18,3 +18,9 @@
   text-decoration: none;
   color: inherit;
 }
+.forgot-password{
+  font-size: 14px;
+}
+.forgot-password :hover{
+  cursor: pointer;
+}

@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import {
   Container, Grow, Grid, Paper, Typography, TextField, Button,
   OutlinedInput, Select, MenuItem, IconButton, InputAdornment, InputLabel,
-  FormControl  
+  FormControl
 } from '@mui/material';
 import {Visibility,VisibilityOff} from '@mui/icons-material';
 
@@ -121,9 +121,14 @@ const Login = () => {
                       }  
                     />
                   </FormControl>
-                  
                   <Button variant='contained' color='primary' size='large' fullWidth onClick={() => navigate('/show-data')}>Navigate Data</Button>
-                  <Button variant='outlined' color='secondary' size='large' type='submit' fullWidth>SignIn</Button>
+                  <Button variant='outlined' color='secondary' size='large' type='submit' fullWidth>Sign-In</Button>
+                  <div className='forgot-password'>
+                  <Typography variant='body1' align='center' color='primary'
+                    style={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '14px' }}
+                    onClick={() => console.log('FORGOT PASS-WORD')}>forgot password ?
+                  </Typography>
+                  </div>
                 </form>
               </Paper>
             </Grid>

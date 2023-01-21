@@ -1,19 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { logIn } from '../../api/index.js';
+import { signUp } from '../../api/index.js';
 
 // import axios from 'axios';
 // const url = 'http://localhost:5000/api/';
 
 const initialState = {
     loading: false,
-    userInfo: {},
+    userAdded: {},
     error: ''
 };
 
-export const loginUser = createAsyncThunk('user/loginUser', async({loginData,navigate}, { rejectWithValue}) => {
+export const signupUser = createAsyncThunk('user/signupUser', async(signupData, { rejectWithValue}) => {
     try {
-        const response = await logIn(loginData);
-        if (response.data.result.department === 'admin') navigate('/admin');
+        const response = await signUp(signupData);
+        console.log('response after sign-up - ',response.data);
+        // if (response.data.result.department === 'admin') navigate('/admin');
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
@@ -22,24 +23,23 @@ export const loginUser = createAsyncThunk('user/loginUser', async({loginData,nav
     }
 });
 
-const userSlice = createSlice({
+const signupSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(loginUser.pending, (state) => {
+        builder.addCase(signupUser.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(loginUser.fulfilled, (state, action) => {
+        builder.addCase(signupUser.fulfilled, (state, action) => {
             state.loading = false;
-            localStorage.setItem('profile',JSON.stringify({...action?.payload}))
-            state.userInfo = action?.payload;
+            state.userAdded = action?.payload;
         });
-        builder.addCase(loginUser.rejected, (state,action) => {
+        builder.addCase(signupUser.rejected, (state,action) => {
             state.loading = false;
             state.error = action.error.message;
          });
     }
 });
 
-export default userSlice.reducer;
+export default signupSlice.reducer;

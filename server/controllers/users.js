@@ -28,15 +28,20 @@ export const login = async (req, res) => {
     }
 };
 
-export const signUpAdmin = async (req, res) => { 
+export const signUpAdmin = async (req, res) => {
     try {
-        const { firstName, lastName, department, email, password } = req.body;
+        const { firstName, lastName, department, email, password, confirmPassword } = req.body;
+        console.log('req.body = ', req.body);
         const existingUser = await UserInfo.find({ department: department, email: email, firstName: firstName, lastName: lastName });
         
         if (existingUser.department) return res.status(400).json({ message: 'User already exists.' });
+        if (password !== confirmPassword) return res.status(400).json({ message: 'Please confirm password' });
         const hashedPassword = await bcrypt.hash(password, 12);
         
-        let result = new UserInfo({ firstName, lastName, department, email, password:hashedPassword });
+        let result = new UserInfo({
+            firstName, lastName, confirmPassword: hashedPassword,
+            department, email, password: hashedPassword
+        });
         result = await result.save();
         
         const token = jwt.sign({
@@ -46,6 +51,17 @@ export const signUpAdmin = async (req, res) => {
 
         res.status(200).json({ result, token });
     } catch (error) {
-        res.status(500).json({message:error.message});
+        res.status(500).json({ message: error.message });
     }
-}
+};
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await UserInfo.find();
+        // console.log(items);
+        res.status(200).json(users);
+        // res.status(200).send(items);
+    } catch (error) {
+        res.status(404).json({message:error.message});
+    }
+};

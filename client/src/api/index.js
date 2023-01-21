@@ -9,7 +9,9 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-export const getData = ()=>API.get(`items`);
+export const getData = () => API.get(`items`);
+export const getUsers = () => API.get(`allUsers`);
+
 export const createData = (form) => API.post(`form`, form);
 
 export const logIn = (loginData) => {
@@ -17,6 +19,8 @@ export const logIn = (loginData) => {
     console.log(loginData);
     return API.post(`login`,loginData);
 };
+
+export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
 // export const signOut = () => API.get(`logout`);
 
 

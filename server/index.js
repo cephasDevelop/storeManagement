@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 
 import itemRoutes from './routes/items.js';
 import loginRoutes from './routes/login.js';
+import signupRoutes from './routes/signup.js';
+
 
 dotenv.config();
 const app = express();
@@ -21,7 +23,12 @@ app.use('/api/items/', itemRoutes);
 app.use('/api/form/', itemRoutes);
 
 app.use('/api/login/', loginRoutes);
-app.use('/api/signupforadmin/',loginRoutes);
+app.use('/api/allUsers/', loginRoutes);
+
+app.use('/api/signupforadmin/', signupRoutes);
+
+
+
 
 
 const PORT = process.env.PORT||8000;
