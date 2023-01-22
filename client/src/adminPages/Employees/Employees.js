@@ -1,41 +1,49 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import {
+  // useState,
+  useEffect
+} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import "./employees.css";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../../dummyData";
+// import { DeleteOutline } from "@mui/icons-material";
+// import { productRows } from "../../dummyData";
 
 import UserAvatar from './UserAvatar';
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
 import { fetchUsers } from '../../features/userInfo/allUsers';
+import { updateUser } from '../../features/userInfo/updateSlice.js';
+import DialogComp from './DialogComp';
+
+const UPDATE = 'UPDATE';
+const DELETE = 'DELETE';
 
 const Employees = () => {
-  const allUsers = useSelector(state => state.users.allUsers);
-  console.log('Selector allUsers - ',allUsers);
   const dispatch = useDispatch();
+
+  const allUsers = useSelector(state => state.users.allUsers);
+ 
   useEffect(() => { 
       dispatch(fetchUsers());
-  }, [dispatch]);
-  
-  // const [data, setData] = useState(productRows);
-  const [data, setData] = useState(allUsers);
-  console.log('useState allUsers - ',data);
+  }, [dispatch,allUsers]);
 
-
-  const handleDelete = (mongoId,id) => {
-    setData(allUsers.filter((item) => item.id !== id));
+  const handleDelete = (mongoId) => {
+    console.log('TO:DO - Delete user accessed !');
+      // alert('Are sure, you want to detele the user?');
+    // setData(allUsers.filter((item) => item.id !== id));
     // TO:DO dispatch delete
   };
-  const changeStatus = (id) => { 
-    // setData(data.map((item) => { 
-    //   if (item.id === id) {
-    //     return item.status === 'active' ? 'not-active' : "active";
-    //   }
-    // }))
+
+  const changeStatus = (mongoId) => { 
+    const selectedUser = allUsers.filter((item) => item._id === mongoId)[0];
+    if (selectedUser.active === 'true') {
+      dispatch(updateUser({ id: mongoId, active: false }));
+    } else { 
+      dispatch(updateUser({ id: mongoId, active: true }));
+    }
   };
 
   const columns = [
@@ -45,7 +53,6 @@ const Employees = () => {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {/* <img className="productListImg" src={params.row.img} alt="" /> */}
             <UserAvatar name={`${params.row.firstName} ${params.row.lastName}`}/>&nbsp;&nbsp;
             {`${params.row.firstName} ${params.row.lastName}`}
           </div>
@@ -57,7 +64,6 @@ const Employees = () => {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {/* <img className="productListImg" src={params.row.img} alt="" /> */}
             {`${params.row.department}`}
           </div>
         );
@@ -67,9 +73,9 @@ const Employees = () => {
       field: "status", headerName: "Status", width: 100,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            {params.row.active?'Active':'Suspended'}
-          </div>
+              <div className="productListItem" style={{color:`${params.row.active === 'true'?'black':'red'}`}}>
+                {params.row.active === 'true'?'Active':'Suspended'}
+              </div>
         );
       },
     },
@@ -86,10 +92,20 @@ const Employees = () => {
     {
       field: "action", headerName: "Action", width: 200,
       renderCell: (params) => {
+        const propId = params.row._id;
         return (
           <>
-            <button className="productListEdit" onClick={()=>changeStatus(params.row._id) }>Change Status</button>
-            <DeleteOutline className="productListDelete" onClick={() => handleDelete(params.row._id,params.row.id)}/>
+            {params.row.department !== 'admin'&&
+              <>
+              {/* <button className="productListEdit" onClick={() => changeStatus(params.row._id)}></button> */}
+              <DialogComp idPassed={propId} changeStatus={changeStatus} status={ UPDATE}></DialogComp>
+              <DialogComp idPassed={propId} handleDelete={handleDelete} status={ DELETE}></DialogComp>
+              
+                
+              {/* <DeleteOutline className="productListDelete" onClick={() => handleDelete(params.row._id)}/> */}
+              </>
+            }
+            
           </>
         );
       },
@@ -104,11 +120,11 @@ const Employees = () => {
         
       <div className="productList">
         <div className="productTitleContainer">
-          <h2 className="productTitle">Users' List</h2>
+            <h2 className="productTitle">Users' List</h2>
           <Link to="newEmployee">
             <button className="productAddButton">Create New User</button>
           </Link>
-        </div>
+          </div>
         <DataGrid
             rows={allUsers.map((value,idx) => { 
               let id = idx + 1;

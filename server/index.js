@@ -25,10 +25,9 @@ app.use('/api/form/', itemRoutes);
 app.use('/api/login/', loginRoutes);
 app.use('/api/allUsers/', loginRoutes);
 
+// app.use('/api/update/:id', signupRoutes);
+app.use('/api/updateUser/', signupRoutes);
 app.use('/api/signupforadmin/', signupRoutes);
-
-
-
 
 
 const PORT = process.env.PORT||8000;

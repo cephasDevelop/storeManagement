@@ -12,6 +12,8 @@ API.interceptors.request.use((req) => {
 export const getData = () => API.get(`items`);
 export const getUsers = () => API.get(`allUsers`);
 
+
+
 export const createData = (form) => API.post(`form`, form);
 
 export const logIn = (loginData) => {
@@ -21,6 +23,13 @@ export const logIn = (loginData) => {
 };
 
 export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
+
+export const updateUserData = (updateInfo) => {
+    console.log("SECOND API");
+    console.log("payload data - ",updateInfo);
+    // return API.patch(`update/${updateInfo.id}`, updateInfo.active);
+    return API.patch(`updateUser`, updateInfo);
+}
 // export const signOut = () => API.get(`logout`);
 
 

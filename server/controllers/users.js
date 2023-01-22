@@ -2,6 +2,7 @@ import UserInfo from "../models/userInfo.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from 'dotenv';
+import mongoose from "mongoose";
 
 dotenv.config();
 export const login = async (req, res) => {
@@ -11,6 +12,7 @@ export const login = async (req, res) => {
 
         const user = await UserInfo.findOne({ department: department, email: email, firstName: firstName });
         if (!user.department) return res.status(404).json({ message: 'User does not exist.' });
+        if(user.active === 'false') return res.status(404).json({ message: 'User temporarly suspended.' });
         console.log('found the user fron DB - ', user);
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         
@@ -58,10 +60,27 @@ export const signUpAdmin = async (req, res) => {
 export const getUsers = async (req, res) => {
     try {
         const users = await UserInfo.find();
-        // console.log(items);
         res.status(200).json(users);
-        // res.status(200).send(items);
     } catch (error) {
         res.status(404).json({message:error.message});
     }
+};
+
+export const updateUserStatus = async (req, res) => { 
+    try {
+        console.log('request.params = ',req.params);
+        console.log('request.body = ',req.body);
+        console.log('request.query = ',req.query);
+        // const {id} = req.params.id;
+        const {active,id} = req.body;
+        
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No user with that id');
+
+        const updatedUser = await UserInfo.findByIdAndUpdate({_id:id}, {active:active}, { new: true });
+        console.log('Updated Used Data - ',updatedUser)
+        res.status(200).json(updatedUser);        
+    } catch (error) {
+        res.status(404).json({message:error.message});
+    }
+    
 };
