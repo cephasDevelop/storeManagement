@@ -54,7 +54,9 @@ export default function AlertDialogSlide(props) {
         <DialogTitle>{props.status==='UPDATE'?" UPDATE USER ? ":" DELETE USER ? "}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Are you sure to make the change?
+            {props.status === 'UPDATE' ?
+              " Are you sure you want to update the user ? "
+              : " Are you sure you want to delete the user ? "}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

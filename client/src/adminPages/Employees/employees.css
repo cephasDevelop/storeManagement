@@ -39,7 +39,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
+.productTitleContainer-NewUser{
+  max-width: 60vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
 .productTitle{
   height:0.5em;
 }

@@ -24,11 +24,18 @@ export const logIn = (loginData) => {
 
 export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
 
-export const updateUserData = (updateInfo) => {
-    console.log("SECOND API");
-    console.log("payload data - ",updateInfo);
+export const updateUserData = (id,active) => {
+    // console.log("SECOND API");
+    console.log("payload data - ",id,active);
     // return API.patch(`update/${updateInfo.id}`, updateInfo.active);
-    return API.patch(`updateUser`, updateInfo);
+    return API.patch(`updateUser/${id}`, {active});
+}
+
+export const deleteUser = (id) => {
+    console.log("SECOND API");
+    console.log("payload data - ",id);
+    // return API.patch(`update/${updateInfo.id}`, updateInfo.active);
+    return API.delete(`deleteUser/${id}`);
 }
 // export const signOut = () => API.get(`logout`);
 

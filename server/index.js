@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 import itemRoutes from './routes/items.js';
 import loginRoutes from './routes/login.js';
 import signupRoutes from './routes/signup.js';
-
+import deleteUpdateRoutes from './routes/deleteUpdateUser.js';
 
 dotenv.config();
 const app = express();
@@ -26,9 +26,10 @@ app.use('/api/login/', loginRoutes);
 app.use('/api/allUsers/', loginRoutes);
 
 // app.use('/api/update/:id', signupRoutes);
-app.use('/api/updateUser/', signupRoutes);
 app.use('/api/signupforadmin/', signupRoutes);
 
+app.use('/api/deleteUser/', deleteUpdateRoutes);
+app.use('/api/updateUser/', deleteUpdateRoutes);
 
 const PORT = process.env.PORT||8000;
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})

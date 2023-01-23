@@ -1,4 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+import {
+  Link,
+  // useNavigate
+} from "react-router-dom";
 
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
@@ -16,7 +20,7 @@ import {
 import { useDispatch } from 'react-redux';
 
 // import action
-import { signupUser } from '../../features/userInfo/signupSlice.js';
+import { signupUser } from '../../features/userInfo/signUpInSlice.js';
 
 
 
@@ -29,7 +33,8 @@ const departmentNames = [
 
 const NewEmployee = () => {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
     const [createUser, setCreateUser] = useState({
         firstName: '', lastName: '',confirmPassword:'',
@@ -58,8 +63,12 @@ const NewEmployee = () => {
       <AdminSideBar />
       <div className="productWrapper">
         <div className="newProduct">
-        <h2 className="productTitle">Enter New User</h2>
-                      
+          <div className="productTitleContainer-NewUser">
+              <h2 className="productTitle" style={ {paddingBottom:'10px'}}>Enter New User</h2>
+            <Link to="/admin/employees">
+                <button className="productAddButton" style={{ width: '100px' }}>Back</button>
+            </Link>
+          </div>            
         <Container>
           <Grid container justify='space-between' spacing={ 3} style={{minHeight:'100vh'} }>
             <Grid item justify="space-between" xs={12} sm={9} >

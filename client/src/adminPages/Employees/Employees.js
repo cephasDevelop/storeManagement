@@ -1,22 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import {
-  // useState,
-  useEffect
-} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import "./employees.css";
-
 import { DataGrid } from "@mui/x-data-grid";
-// import { DeleteOutline } from "@mui/icons-material";
-// import { productRows } from "../../dummyData";
 
 import UserAvatar from './UserAvatar';
+import DialogComp from './DialogComp';
+import "./employees.css";
+
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
-import { fetchUsers } from '../../features/userInfo/allUsers';
-import { updateUser } from '../../features/userInfo/updateSlice.js';
-import DialogComp from './DialogComp';
+import { fetchUsers,updateUser, deleteUserInfo} from '../../features/userInfo/allUsersSlice';
+
+
 
 const UPDATE = 'UPDATE';
 const DELETE = 'DELETE';
@@ -31,10 +26,8 @@ const Employees = () => {
   }, [dispatch,allUsers]);
 
   const handleDelete = (mongoId) => {
-    console.log('TO:DO - Delete user accessed !');
-      // alert('Are sure, you want to detele the user?');
-    // setData(allUsers.filter((item) => item.id !== id));
-    // TO:DO dispatch delete
+    console.log('TO:DO - Delete user accessed!,=id= ',mongoId);
+    dispatch(deleteUserInfo({id:mongoId}));
   };
 
   const changeStatus = (mongoId) => { 
@@ -97,15 +90,10 @@ const Employees = () => {
           <>
             {params.row.department !== 'admin'&&
               <>
-              {/* <button className="productListEdit" onClick={() => changeStatus(params.row._id)}></button> */}
               <DialogComp idPassed={propId} changeStatus={changeStatus} status={ UPDATE}></DialogComp>
               <DialogComp idPassed={propId} handleDelete={handleDelete} status={ DELETE}></DialogComp>
-              
-                
-              {/* <DeleteOutline className="productListDelete" onClick={() => handleDelete(params.row._id)}/> */}
               </>
             }
-            
           </>
         );
       },

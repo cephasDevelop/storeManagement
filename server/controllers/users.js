@@ -71,8 +71,9 @@ export const updateUserStatus = async (req, res) => {
         console.log('request.params = ',req.params);
         console.log('request.body = ',req.body);
         console.log('request.query = ',req.query);
-        // const {id} = req.params.id;
-        const {active,id} = req.body;
+        const id = req.params.id;
+        const { active } = req.body;
+        // const id = req.query;
         
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No user with that id');
 
@@ -84,3 +85,29 @@ export const updateUserStatus = async (req, res) => {
     }
     
 };
+
+export const userDelete = async (req, res) => {
+    try {
+        console.log('Delete Function Controllers');
+        const id = req.params.id;
+        
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            // console.log('id not from mongodb');
+            return res.status(404).send('No user with that id');
+        }
+        // console.log('id is from mongodb');
+        const existingUser = await UserInfo.find({ _id: id});
+        
+        if (!existingUser) {
+            // console.log('found existing user');
+            return res.status(400).json({ message: 'User does not exists.' });
+        }
+
+        const deletedUser = await UserInfo.findByIdAndRemove({_id:id});
+        console.log('Updated Used Data - ', deletedUser);
+        
+        res.status(200).json('user deleted');        
+    } catch (error) {
+        res.status(404).json({message:error.message});
+    }
+}

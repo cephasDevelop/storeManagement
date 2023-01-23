@@ -9,7 +9,7 @@ import {Visibility,VisibilityOff} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { loginUser } from '../features/userInfo/userSlice.js';
+import { loginUser } from '../features/userInfo/signUpInSlice.js';
 
 
 const departmentNames = [
