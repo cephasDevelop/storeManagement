@@ -53,22 +53,3 @@ const formSlice = createSlice({
 export default formSlice.reducer;
 
 
-
-
-// const itemSlice = createSlice({
-//     name: 'item',
-//     initialState,
-//     extraReducers: (builder) => {
-//         builder.addCase(fetchUsers.pending, (state) => {
-//             state.loading = true;
-//         });
-//         builder.addCase(fetchUsers.fulfilled, (state, action) => {
-//             state.loading = false;
-//             state.items = action.payload;
-//         });
-//         builder.addCase(fetchUsers.rejected, (state,action) => {
-//             state.loading = false;
-//             state.error = action.error.message;
-//          });
-//     }
-// });

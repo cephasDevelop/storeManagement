@@ -12,31 +12,24 @@ API.interceptors.request.use((req) => {
 export const getData = () => API.get(`items`);
 export const getUsers = () => API.get(`allUsers`);
 
-
-
 export const createData = (form) => API.post(`form`, form);
 
 export const logIn = (loginData) => {
-    console.log('data passed to through the API - login');
-    console.log(loginData);
     return API.post(`login`,loginData);
 };
 
 export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
 
-export const updateUserData = (id,active) => {
-    // console.log("SECOND API");
-    console.log("payload data - ",id,active);
-    // return API.patch(`update/${updateInfo.id}`, updateInfo.active);
-    return API.patch(`updateUser/${id}`, {active});
+export const updateUserData = (id,active) => API.patch(`updateUser/${id}`, {active});
+
+export const deleteUser = (id) => API.delete(`deleteUser/${id}`);
+
+export const makeRequest = (requestObject) => {
+    console.log('Second API call');
+    console.log('request object = ', requestObject);
+    return API.post(`makeRequest/`, { ...requestObject });
 }
 
-export const deleteUser = (id) => {
-    console.log("SECOND API");
-    console.log("payload data - ",id);
-    // return API.patch(`update/${updateInfo.id}`, updateInfo.active);
-    return API.delete(`deleteUser/${id}`);
-}
+export const getAllRequested = () => API.get(`requestedtems`);
+export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`deleteRequest/${selfId}`);
 // export const signOut = () => API.get(`logout`);
-
-
