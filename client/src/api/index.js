@@ -31,5 +31,10 @@ export const makeRequest = (requestObject) => {
 }
 
 export const getAllRequested = () => API.get(`requestedtems`);
-export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`deleteRequest/${selfId}`);
+export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`delete-request/${selfId}`);
+export const makePayment = (payload) => {
+    console.log('PAYMENT DATA');
+    console.log(payload);
+    return API.patch(`payment-request/${payload.id}`, {...payload});
+}
 // export const signOut = () => API.get(`logout`);

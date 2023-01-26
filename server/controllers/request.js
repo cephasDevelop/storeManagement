@@ -11,19 +11,15 @@ export const fetchRequestedItems = async (req, res) => {
     }
 };
 
+
+// mongoId, requestQty, requestStatus, requestedBy,
+//             requestDate, modelNo, purchasePrice, sellingPrice,
+//             storeQty, productType, productName, productId,
+//             clientName, storedDate
 export const createRequest = async (req, res) => { 
     try {
-        const {
-            mongoId, requestQty, requestStatus, requestedBy,
-            requestDate, modelNo, purchasePrice, sellingPrice,
-            storeQty, productType, productName, productId,
-            clientName, storedDate } = req.body;
-        let requestedData = new RequestData({
-            mongoId, requestQty, requestStatus, requestedBy,
-            requestDate, modelNo, purchasePrice, sellingPrice,
-            storeQty, productType, productName, productId,
-            clientName, storedDate
-        });
+        const payload = req.body;
+        let requestedData = new RequestData({...payload});
         requestedData = await requestedData.save();
         console.log(requestedData);
         res.status(201).send(requestedData);
@@ -35,7 +31,7 @@ export const createRequest = async (req, res) => {
 export const cancelRequest = async (req, res) => {
     try {
         console.log('Delete Request Function Controllers');
-        console.log('req.params = ',req.params);
+        console.log('req.params = ', req.params);
         const id = req.params.id;
         
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -43,21 +39,37 @@ export const cancelRequest = async (req, res) => {
             return res.status(404).send('No item with that id');
         }
         // console.log('id is from mongodb');
-        const requestedItem = await RequestData.find({ _id: id});
+        const requestedItem = await RequestData.find({ _id: id });
         
         if (!requestedItem) {
             // console.log('found existing user');
             return res.status(400).json({ message: 'Item does not exists.' });
         }
 
-        const deletedRequest = await RequestData.findByIdAndRemove({_id:id});
+        const deletedRequest = await RequestData.findByIdAndRemove({ _id: id });
         console.log('The deleted item - ', deletedRequest);
         
-        res.status(200).json('Requested item deleted');        
+        res.status(200).json('Requested item deleted');
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+export const paymentRequest = async (req, res) => {
+    console.log("processing payment");
+    try {
+        const id = req.params.id;
+        const payload = req.body;
+        
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Item with that id');
+
+        const paidItem = await RequestData.findByIdAndUpdate({_id:id}, {...payload}, { new: true });
+        console.log('Paid Item - ',paidItem)
+        res.status(200).json(paidItem);        
     } catch (error) {
         res.status(404).json({message:error.message});
     }
-}
+ };
 // TO DO : UPDATE REQUEST //
 
 // export const requestItem = async (req, res) => { 

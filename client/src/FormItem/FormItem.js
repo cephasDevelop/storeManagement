@@ -12,7 +12,7 @@ const FormItem = () => {
   const [postItems, setPostItems] = useState({
     productName: '',
     productType: '',
-    productId: '',
+    id: '',
     modelNo: '',
     description: '',
     purchasePrice: '',
@@ -30,7 +30,7 @@ const FormItem = () => {
     setPostItems({
       productName: '',
       productType: '',
-      productId: '',
+      id: '',
       modelNo: '',
       description: '',
       purchasePrice: '',
@@ -70,7 +70,7 @@ const FormItem = () => {
                     value={postItems.modelNo} onChange={(e)=>handleChange(e)} style={{marginBottom:'10px'}}/>
                   <TextField name='productName' variant='outlined' label='product name' fullWidth
                     value={postItems.productName} onChange={(e)=>handleChange(e)} style={{marginBottom:'10px'}} />
-                  <TextField name='productId' variant='outlined' label='product Id' fullWidth
+                  <TextField name='id' variant='outlined' label='product Id' fullWidth
                     value={postItems.productId} onChange={(e)=>handleChange(e)} style={{marginBottom:'10px'}} />
                   <TextField name='purchasePrice' variant='outlined' label='purchase Price' fullWidth
                     value={postItems.purchasePrice} onChange={(e)=>handleChange(e)} style={{marginBottom:'10px'}} />

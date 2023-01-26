@@ -20,12 +20,18 @@ const ItemSchema = mongoose.Schema({
         min:1,
         max:20,
     },
-    productId: {
+    id: {
         type: String,
         // required: true,
         min:1,
         max:20,
     },
+    // productId: {
+    //     type: String,
+    //     // required: true,
+    //     min:1,
+    //     max:20,
+    // },
     purchasePrice: {
         type: Number,
         default: 0

@@ -14,11 +14,11 @@ export const getItems = async (req, res) => {
 export const createItems = async (req, res) => { 
 
     try {
-        const { productName, productType, productId,modelNo,
+        const { productName, productType, id,modelNo,
     description,purchasePrice,sellingPrice,qty,image} = req.body;
         let form = new ItemData({
             productName, productType,
-            productId, modelNo,
+            id, modelNo,
             description, purchasePrice,
             sellingPrice, qty, image
         });

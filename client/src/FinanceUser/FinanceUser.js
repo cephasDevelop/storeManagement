@@ -4,63 +4,53 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from "@mui/x-data-grid";
 
 import { fetchItems } from '../features/items/itemSlice.js';
-import { deleteRequest,requestThis,getRequestedItems } from '../features/requestSlice/requestSlice.js';
+import { getRequestedItems,makingPayment } from '../features/requestSlice/requestSlice.js';
 
 import AdminNavBar from "../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
-
-
 import DialogComp from './DialogComp';
 
-// import { fetchUsers, updateUser, deleteUserInfo } from '../../features/userInfo/allUsersSlice';
+const FinanceUser = () => {
+    
+    const dispatch = useDispatch();
+    const items = useSelector(state => state.item.items);
+    const requestedItems = useSelector(state => state.requested.requestedItems);
 
+    const [user, setUser] = useState({});
 
-const REQUEST = 'REQUEST';
-const CANCEL = 'CANCEL';
+    useEffect(() => { 
+        dispatch(getRequestedItems());
+        dispatch(fetchItems());
+    }, [dispatch, items, requestedItems]);
 
-const RequestUser = () => {
-
-  const dispatch = useDispatch();
-  const items = useSelector(state => state.item.items);
-  const requestedItems = useSelector(state => state.requested.requestedItems);
-
-  const [comment,setComment] = useState(''); 
-
-
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    const userStored = JSON.parse(localStorage.getItem('profile'));
-    if (userStored) {
-      setUser(userStored);
+    useEffect(() => {
+        const userStored = JSON.parse(localStorage.getItem('profile'));
+        if (userStored) { setUser(userStored); };
+    }, []);
+  
+    const makePayment = (idPassed,paymentInfo,item) => { 
+      console.log('payment in progress ... ');
+      console.log('idPassed = ',idPassed);
+      console.log('paymentInfo = ',paymentInfo);
+      console.log('item = ', item);
+      dispatch(makingPayment({
+        id:item._id,
+        payerName: paymentInfo.payerName,
+        paymentType: paymentInfo.paymentType,
+        invoiceNo: paymentInfo.invoiceNo,
+        checkNo: paymentInfo.checkNo,
+        priceUsed: paymentInfo.priceUsed,
+        paidQty: paymentInfo.qtyPaid,
+        paymentProcessedBy: paymentInfo.paymentProcessedBy,
+        invoiceDate: paymentInfo.invoiceDate,
+        amountRecieved:paymentInfo.amount,
+        checkExpiresAt: paymentInfo.checkExpiresAt,
+        paymentStatus: 'paid',
+      }));
+      
     }
-  },[]);
-
-  useEffect(() => { 
-    dispatch(getRequestedItems());
-    dispatch(fetchItems());
-  }, [dispatch,items]);
-
-  
-  
-  const cancelRequest = (selfId,fromMongoId) => {
-    dispatch(deleteRequest({selfId,fromMongoId}));
-  };
-
-  const makeRequest = (mongoId, requestQty,clientName, { item }) => {
-    const date = new Date();
-    // TO DO : correction shall be made to the requestedBy property //
-    dispatch(requestThis({
-      mongoId, requestQty, requestStatus: 'true',
-      // requestedBy: `${user.firstName} ${user.lastName}`,
-      requestedBy: `${user.result.firstName} .${String((user.result.lastName)[0]).toLocaleUpperCase()}`,
-      requestDate: date.toISOString(),
-      modelNo: item.modelNo, purchasePrice: item.purchasePrice,
-      sellingPrice: item.sellingPrice, storeQty: item.qty,
-      productType: item.productType, productName: item.productName,
-      productId:item.id,clientName,storedDate:item.storedDate,amountRecieved:''
-    }));
-  };
-  // COLUMNS FOR REQUESTED ITEMS
+    
+    // COLUMNS FOR REQUESTED ITEMS
   const requestedColumns = [
     { field: "id", headerName: "ID", width: 15 },
     {
@@ -124,13 +114,13 @@ const RequestUser = () => {
       },
     },
     {
-      field: "action", headerName: "Action", width: 80,
+      field: "action", headerName: "Action", width: 100,
       renderCell: (params) => {
         const propId = params.row._id;
         const requestedElement = params.row;
-        return (
-              <DialogComp idPassed={propId} changeStatus={cancelRequest}
-                status={CANCEL} comment={comment} setComment={setComment} item={requestedElement }
+          return (
+            //   item, idPassed, changeStatus
+              <DialogComp idPassed={propId} changePaymentStatus={makePayment} item={requestedElement } user={user}
               ></DialogComp>
         );
       },
@@ -199,28 +189,8 @@ const RequestUser = () => {
         );
       },
     },
-    {
-      field: "action", headerName: "Action", width: 200,
-      renderCell: (params) => {
-        const propId = params.row._id;
-        const item = params.row;
-        return (
-          <>
-            {params.row.department !== 'admin'&&
-              <>
-              <DialogComp idPassed={propId} changeStatus={makeRequest}
-                status={REQUEST} comment={comment} setComment={setComment} item={item }
-              ></DialogComp>
-              {/* <DialogComp idPassed={propId} handleDelete={cancelRequest}
-                status={CANCEL}
-              ></DialogComp> */}
-              </>
-            }
-          </>
-        );
-      },
-      },
   ];
+
 
   return (
     <>
@@ -230,10 +200,7 @@ const RequestUser = () => {
         
       <div className="productList"  style={{height:"100vh"}}>
         <div className="productTitleContainer">
-            <h2 className="productTitle">Requested Items</h2>
-          {/* <Link to="newEmployee">
-            <button className="productAddButton">Create New User</button>
-          </Link> */}
+            <h2 className="productTitle">Active Items</h2>
           </div>
           <DataGrid
             style={{height:'50vh'}}
@@ -244,27 +211,29 @@ const RequestUser = () => {
           disableSelectionOnClick
           columns={requestedColumns}
           pageSize={3}
+                      
           // checkboxSelection
           />
           <div className="productTitleContainer">
             <h2 className="productTitle">Items list</h2>
           </div>
           <DataGrid
-            style={{ height: '60vh' }}
-            rows={items.map((value, idx) => {
+            style={{height:'60vh'}}
+            rows={items.map((value,idx) => { 
               let id = idx + 1;
-              return { ...value, id };
+              return {...value,id};
             })}
-            disableSelectionOnClick
-            columns={columns}
-            pageSize={4}
+          disableSelectionOnClick
+          columns={columns}
+          pageSize={4}
+                      
           // checkboxSelection
         />
       </div>
       </div>   
       
     </>
-  );
+  )
 }
 
-export default RequestUser;
+export default FinanceUser;

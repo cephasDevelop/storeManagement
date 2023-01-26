@@ -2,37 +2,21 @@ import React, { useState} from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, Slide, TextField,
-  // FormControl
 } from '@mui/material';
-// import { DeleteOutline } from '@mui/icons-material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-// {idPassed, changeStatus, status}
-// {
-// idPassed={propId} changeStatus={makeRequest}
-//                 status={REQUEST} comment={comment} setComment={setComment} items={items }}
+
 export default function AlertDialogSlide(
   {
   item, idPassed,status,
-  comment, changeStatus,setComment,
-    // handleDelete, status
+  comment, changeStatus,
   }
 ) {
   
   const [open, setOpen] = useState(false);
   const [request, setRequest] = useState({requestQty:'',clientName:''});
-  
-  // const [selectedItem, setSelectedItem] = useState({});
-  // useEffect(() => { 
-  //   setSelectedItem(items.filter((item) => {
-  //     if (item._id === idPassed) { 
-  //       return { ...item };
-  //     }
-  //   })[0]);
-  //   console.log('Selected Item = ',selectedItem);
-  // },[items,idPassed]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -66,21 +50,8 @@ export default function AlertDialogSlide(
     <div>
       {status==='REQUEST'?
       <button className="productListEdit" onClick={handleClickOpen}>make request</button>:
-      <button className="productListEdit" onClick={handleClickOpen} style={{color:'red'}}>cancel request</button>
-      }
-          {/* {status==='REQUEST'?
-            <Button style={{border: 'none',padding: '5px 10px',backgroundColor: '#3bb077',color: 'white',cursor: 'pointer',marginRight: '20px' }}
-                    //   variant="outlined"
-                onClick={handleClickOpen}>Change Status
-              </Button>
-              <button className="productListEdit" onClick={handleClickOpen}>make request</button>
-              :
-              <button className="productListEdit" style={{color:'red'}} onClick={handleClickOpen}>cancel</button>
-        
-              <DeleteOutline className="productListDelete" onClick={handleClickOpen}>
-              </DeleteOutline>
-          } */}
-       
+      <button className="productListEdit" onClick={handleClickOpen} style={{color:'red'}}>cancel</button>
+      }       
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -88,7 +59,6 @@ export default function AlertDialogSlide(
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle>{status==='REQUEST'?" MAKE REQUEST ? ":" CANCEL REQUEST ? "}</DialogTitle> */}
         <DialogTitle>{status==='REQUEST'?" MAKE REQUEST ? ":'CANCEL REQUEST ?'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
@@ -101,7 +71,6 @@ export default function AlertDialogSlide(
           <form autoComplete='off' noValidate onSubmit={(e) => handleAgree(e)}>
             <TextField type='number' name='requestQty' variant='outlined'
               label='Qty requested' xs={12} sm={12} fullWidth
-              // requestQty:'',clientName
               value={request.requestQty} onChange={(e) => setRequest({ ...request, requestQty: e.target.value })} />
             <TextField type='text' name='clientName' variant='outlined'
               label='Client Name' xs={12} sm={12} fullWidth

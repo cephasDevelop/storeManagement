@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { makeRequest,getAllRequested,cancelRequest } from '../../api/index.js';
+import { makeRequest,getAllRequested,cancelRequest,makePayment } from '../../api/index.js';
 
 const initialState = {
     loading: false,
@@ -44,6 +44,17 @@ export const getRequestedItems = createAsyncThunk('request/getRequestedItems', a
         return rejectWithValue(error.response.data);
     }
 });
+export const makingPayment = createAsyncThunk('request/makingPayment', async (payload, { rejectWithValue}) => {
+    try {
+        // const response = await axios.get(`${url}items`);
+        const response = await makePayment(payload);
+        return response.data;
+    } catch (error) {
+        console.log("fetchItems actions api .... error");
+        console.log(error);
+        return rejectWithValue(error.response.data);
+    }
+});
 const requestSlice = createSlice({
     name: 'request',
     initialState,
@@ -69,6 +80,18 @@ const requestSlice = createSlice({
             state.requestedItems = action.payload;
         });
         builder.addCase(getRequestedItems.rejected, (state,action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
+
+        builder.addCase(makingPayment.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(makingPayment.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(makingPayment.rejected, (state,action) => {
             state.loading = false;
             state.error = action.error.message;
         });

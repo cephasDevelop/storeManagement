@@ -30,7 +30,8 @@ app.use('/api/updateUser/', deleteUpdateRoutes);
 
 app.use('/api/makeRequest/', requestRoutes);
 app.use('/api/requestedtems/', requestRoutes);
-app.use('/api/deleteRequest/', requestRoutes);
+app.use('/api/delete-request/', requestRoutes);
+app.use('/api/payment-request/', requestRoutes);
 
 const PORT = process.env.PORT||8000;
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})

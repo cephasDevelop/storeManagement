@@ -9,9 +9,7 @@ const RequestSchema = mongoose.Schema({
     purchasePrice: String,
     sellingPrice: Number,
     storeQty: Number,
-
-    clientName:String,
-    requestDate: String,
+    clientName: String,
     storedDate: String,
     
     requestStatus: {
@@ -22,45 +20,52 @@ const RequestSchema = mongoose.Schema({
         type: Number,
         default:0
     },
-    requestedBy: {
+    requestedBy: String,
+    requestDate:String,
+    payerName: {
         type: String,
-        default:'request-dpmt'
+        default:''
     },
-    requestedDate: {
+    paymentProcessedBy:{
         type: String,
-        default: new Date().toISOString(),
+        default:''
     },
-
-
+    paymentType:{
+        type: String,
+        default:''
+    },
+    checkNo:{
+        type: String,
+        default:''
+    },
+    checkExpiresAt: {
+        type: String,
+        default:''
+    },
+    invoiceNo: {
+        type: String,
+        default:''
+    },
+    invoiceDate: {
+        type: String,
+        default:''
+    },
+    priceUsed: {
+        type: String,
+        default:''
+    },
     paidQty: {
-        type: Number,
-        default:0
+        type: String,
+        default:''
     },
     paymentStatus: {
         type: String,
         default:''
     },
-    invoiceNumber: {
-        type: String,
-        default:''
-    },
-    datePaid: {
-        type: String,
-        default:''
-    },
     amountRecieved: {
-        type: Number,
-        default:0
-    },
-    cashOrCheck: {
         type: String,
         default:''
     },
-    checkExpireDate: {
-        type: String,
-        default:''
-    }
-
 });
 
 const RequestData = mongoose.model('RequestData', RequestSchema);

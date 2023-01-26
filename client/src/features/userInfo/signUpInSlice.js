@@ -28,6 +28,9 @@ export const loginUser = createAsyncThunk('user/loginUser', async({loginData,nav
     try {
         const response = await logIn(loginData);
         if (response.data.result.department === 'admin') navigate('/admin');
+        if (response.data.result.department === 'teller') navigate('/request');
+        if (response.data.result.department === 'finance') navigate('/finance');
+        if (response.data.result.department === 'store') navigate('/stock');
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
@@ -59,8 +62,9 @@ const signupSlice = createSlice({
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.loading = false;
-            localStorage.setItem('profile',JSON.stringify({...action?.payload}))
-            state.userInfo = action?.payload;
+            localStorage.removeItem('profile');
+            localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
+            state.userInfo = action.payload;
         });
         builder.addCase(loginUser.rejected, (state,action) => {
             state.loading = false;
