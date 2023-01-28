@@ -3,7 +3,7 @@ import "./footer.css";
 
 function Footer() {
   return (
-      <div className="footer">
+      <div className="footer" style={{position:'sticky',top:'100%'}}>
           <div className="sites">
               <p>company facebook</p>
               <p>company telegram</p>

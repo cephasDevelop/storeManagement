@@ -3,7 +3,7 @@ import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
 
-import Footer from './Footer/Footer.js';
+// import Footer from './Footer/Footer.js';
 import Home from './Home/Home.js';
 import NavBar from './NavBar/NavBar.js';
 import Form from './FormItem/FormItem.js';
@@ -21,12 +21,12 @@ import Product from './adminPages/product/Product';
 import Employees from './adminPages/Employees/Employees';
 import NewEmployee from './adminPages/Employees/NewEmployee';
 // import FormItem from './FormItem/FormItem.js';
-
-
+import RequestUser from './RequestUser/RequestUser';
+import FinanceUser from './FinanceUser/FinanceUser';
 
 function App() {
   return (
-    <React.Fragment>
+    <div style={{minHeight:'100vh'}}>
     <NavBar />
       <Routes>
         <Route path='/' element={<Home />}/>
@@ -45,10 +45,12 @@ function App() {
         <Route path="admin" element={<AdminHome />} />
         <Route path='admin/employees/newEmployee' element={ <NewEmployee/>}/>
         <Route path="admin/employees" element={<Employees />} />
+        <Route path="request" element={<RequestUser />} />
+        <Route path="finance" element={<FinanceUser />} />
 
       </Routes>
-    <Footer />
-    </React.Fragment>
+    {/* <Footer /> */}
+    </div>
   );
 }
 

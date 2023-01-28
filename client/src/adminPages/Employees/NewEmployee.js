@@ -47,13 +47,13 @@ const NewEmployee = () => {
     });
 
     const handleChange = (e) => {
-    setCreateUser(prev=> ({...prev, [e.target.name]: e.target.value}) );
+      setCreateUser(prev=> ({...prev, [e.target.name]: e.target.value}) );
     }
 
     const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(signupUser(createUser));
-    handleClearInfo();
+      e.preventDefault();
+      dispatch(signupUser(createUser));
+      handleClearInfo();
     }
   
   return (
