@@ -23,13 +23,13 @@ import NewEmployee from './adminPages/Employees/NewEmployee';
 // import FormItem from './FormItem/FormItem.js';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
+import MainHome from './MainHome/MainHome';
 
 function App() {
   return (
     <div style={{minHeight:'100vh'}}>
-    <NavBar />
       <Routes>
-        <Route path='/' element={<Home />}/>
+        <Route path='/' element={<MainHome />}/>
         {/* <Route path='admin' element={<Administrator />}/> */}
         <Route path='data-in' element={<Form />} />
         <Route path='login' element={<Login />} />

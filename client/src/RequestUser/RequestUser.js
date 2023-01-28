@@ -14,6 +14,7 @@ import DialogComp from './DialogComp';
 
 const REQUEST = 'REQUEST';
 const CANCEL = 'CANCEL';
+let user;
 
 const RequestUser = () => {
 
@@ -23,18 +24,18 @@ const RequestUser = () => {
 
   const [comment,setComment] = useState(''); 
 
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   useEffect(() => {
-    const userStored = JSON.parse(localStorage.getItem('profile'));
-    if (userStored) {
-      setUser(userStored);
-    }
+    user = JSON.parse(localStorage.getItem('profile'));
+    // if (userStored) {
+    //   setUser(userStored);
+    // }
   },[]);
 
   useEffect(() => { 
     dispatch(getRequestedItems());
     dispatch(fetchItems());
-  }, [dispatch,items]);
+  }, [dispatch]);
 
   
   

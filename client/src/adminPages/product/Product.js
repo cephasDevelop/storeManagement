@@ -77,7 +77,7 @@ const Product = () => {
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey">In stock:</span>
-                            <span className="productInfoValue">{datas[0].qty ? "yes" : "no"}</span>
+                            <span className="productInfoValue">{datas[0].qty}</span>
                         </div>
                     </div>
                 </div>

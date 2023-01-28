@@ -24,8 +24,16 @@
 }
 
 .topRight {
+  /* width: 25%; */
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.userName {
+  width: 150px;
+  font-weight: bold;
+  color: darkblue;
 }
 
 .topLeft {

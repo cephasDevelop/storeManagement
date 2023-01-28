@@ -10,22 +10,23 @@ import AdminNavBar from "../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
 import DialogComp from './DialogComp';
 
+let user;
 const FinanceUser = () => {
     
     const dispatch = useDispatch();
     const items = useSelector(state => state.item.items);
     const requestedItems = useSelector(state => state.requested.requestedItems);
 
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     useEffect(() => { 
         dispatch(getRequestedItems());
         dispatch(fetchItems());
-    }, [dispatch, items, requestedItems]);
+    }, [dispatch]);
 
     useEffect(() => {
-        const userStored = JSON.parse(localStorage.getItem('profile'));
-        if (userStored) { setUser(userStored); };
+        user = JSON.parse(localStorage.getItem('profile'));
+        
     }, []);
   
     const makePayment = (idPassed,paymentInfo,item) => { 
