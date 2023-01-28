@@ -25,7 +25,7 @@ const ItemSchema = mongoose.Schema({
         type: String,
         default:"",
     },
-    productID: Number,
+    id: Number,
     modelNo: Number,
     purchasePrice: Number,
     sellingPrice: Number,
