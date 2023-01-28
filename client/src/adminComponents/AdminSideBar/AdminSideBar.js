@@ -17,9 +17,15 @@ import {
   Password,
 
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminSideBar = () => {
+  const navigate = useNavigate();
+  const handleLogout = ()=>{
+    localStorage.removeItem('profile');
+    navigate('/');
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -87,7 +93,7 @@ const AdminSideBar = () => {
               <Password className="sidebarIcon" />
               Change Password
             </li>
-            <li className="sidebarListItem">
+            <li className="sidebarListItem" onClick={handleLogout}>
               <Logout className="sidebarIcon" />
               Logout
             </li>
