@@ -50,7 +50,7 @@ export const makingPayment = createAsyncThunk('request/makingPayment', async (pa
         const response = await makePayment(payload);
         return response.data;
     } catch (error) {
-        console.log("fetchItems actions api .... error");
+        console.log("payment actions api .... error");
         console.log(error);
         return rejectWithValue(error.response.data);
     }

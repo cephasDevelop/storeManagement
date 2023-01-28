@@ -49,14 +49,14 @@ export default function AlertDialogSlide(
   const clearRequest = () => {
     setPaymentInfo({
       payerName: '',
-      checkNo: '',
-      invoiceNo: '',
-      invoiceDate: '',
-      qtyPaid: '',
-      priceUsed:'',
-      amount: '',
       paymentType: '',
+      invoiceNo: '',
+      checkNo: '',
+      priceUsed:'',
+      qtyPaid: '',
       paymentProcessedBy: '',
+      invoiceDate: '',
+      amount: '',
       checkExpiresAt: ''
     });
   };

@@ -58,12 +58,15 @@ export const cancelRequest = async (req, res) => {
 export const paymentRequest = async (req, res) => {
     console.log("processing payment");
     try {
+        console.log('PAYMENT CONTROLLERS');
+        console.log('req.params = ',req.params);
+        console.log('req.body = ',req.body);
         const id = req.params.id;
         const payload = req.body;
         
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Item with that id');
-
-        const paidItem = await RequestData.findByIdAndUpdate({_id:id}, {...payload}, { new: true });
+// findByIdAndUpdate
+        const paidItem = await RequestData.findOneAndReplace({ _id: id }, {...payload}, { new: true });
         console.log('Paid Item - ',paidItem)
         res.status(200).json(paidItem);        
     } catch (error) {

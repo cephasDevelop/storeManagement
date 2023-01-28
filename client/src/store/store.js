@@ -6,6 +6,7 @@ import formReducer from '../features/itemForm/itemFormSlice.js';
 import signupReducer from '../features/userInfo/signUpInSlice.js';
 import allUsersReducer from '../features/userInfo/allUsersSlice.js';
 import requestReducer from '../features/requestSlice/requestSlice.js';
+import historyReducer from '../features/historySlice/historySlice.js';
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         formItem: formReducer,
         userAdded: signupReducer,
         users: allUsersReducer,
-        requested:requestReducer
+        requested: requestReducer,
+        history:historyReducer
     }
 });
 

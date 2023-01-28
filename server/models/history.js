@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const RequestSchema = mongoose.Schema({
+const historySchema = mongoose.Schema({
     mongoId: String,
     productType: String,
     modelNo: String,
@@ -11,7 +11,6 @@ const RequestSchema = mongoose.Schema({
     storeQty: Number,
     clientName: String,
     storedDate: String,
-    
     requestStatus: {
         type: String,
         default:'true'
@@ -77,9 +76,9 @@ const RequestSchema = mongoose.Schema({
     storeStatus: {
         type: String,
         default:''
-    }
+    },
 });
 
-const RequestData = mongoose.model('RequestData', RequestSchema);
+const HistoryData = mongoose.model('HistoryData', historySchema);
 
-export default RequestData;
+export default HistoryData;

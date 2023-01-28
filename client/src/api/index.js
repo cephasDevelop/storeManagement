@@ -32,9 +32,14 @@ export const makeRequest = (requestObject) => {
 
 export const getAllRequested = () => API.get(`requestedtems`);
 export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`delete-request/${selfId}`);
-export const makePayment = (payload) => {
-    console.log('PAYMENT DATA');
-    console.log(payload);
-    return API.patch(`payment-request/${payload.id}`, {...payload});
-}
+export const makePayment = (payload) => API.put(`payment-request/${payload.id}`, payload);
+
+export const createHistory = (payloadHist) => { 
+    console.log('API HISTORY DATA');
+    console.log(payloadHist);
+    return API.post(`historyCreate`,payloadHist);
+};
+export const getAllHistory = () => { 
+    return API.get(`getHistory`);
+};
 // export const signOut = () => API.get(`logout`);

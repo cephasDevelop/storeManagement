@@ -5,7 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import { fetchItems } from '../features/items/itemSlice.js';
 import { getRequestedItems,makingPayment } from '../features/requestSlice/requestSlice.js';
-
+import { makeHistory } from '../features/historySlice/historySlice.js';
 import AdminNavBar from "../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
 import DialogComp from './DialogComp';
@@ -29,12 +29,13 @@ const FinanceUser = () => {
     }, []);
   
     const makePayment = (idPassed,paymentInfo,item) => { 
-      console.log('payment in progress ... ');
-      console.log('idPassed = ',idPassed);
-      console.log('paymentInfo = ',paymentInfo);
-      console.log('item = ', item);
-      dispatch(makingPayment({
-        id:item._id,
+      // console.log('payment in progress ... ');
+      // console.log('idPassed = ',idPassed);
+      // console.log('paymentInfo = ',paymentInfo);
+      // console.log('item = ', item);
+
+      const financeObj = {
+        id:idPassed,
         payerName: paymentInfo.payerName,
         paymentType: paymentInfo.paymentType,
         invoiceNo: paymentInfo.invoiceNo,
@@ -46,8 +47,11 @@ const FinanceUser = () => {
         amountRecieved:paymentInfo.amount,
         checkExpiresAt: paymentInfo.checkExpiresAt,
         paymentStatus: 'paid',
-      }));
-      
+        storeStatus:'pending'
+      };
+
+      dispatch(makingPayment({...item,...financeObj}));
+      dispatch(makeHistory({...item,...financeObj}));
     }
     
     // COLUMNS FOR REQUESTED ITEMS
@@ -118,10 +122,17 @@ const FinanceUser = () => {
       renderCell: (params) => {
         const propId = params.row._id;
         const requestedElement = params.row;
-          return (
-            //   item, idPassed, changeStatus
+        return (
+          <div>
+            {params.row.paymentStatus!=='paid'?
               <DialogComp idPassed={propId} changePaymentStatus={makePayment} item={requestedElement } user={user}
-              ></DialogComp>
+              ></DialogComp> :
+              <p style={{color:'green'}}>paid</p>
+            }
+            
+            </div>
+            //   params.row.paymentStatus!=='paid'?'pending':'paid'
+              
         );
       },
       },
@@ -141,6 +152,37 @@ const FinanceUser = () => {
         return (
           <p className="productListItem">
                 {params.row.clientName}
+          </p>
+        );
+      },
+    },
+    //------------------------------------------------------
+    {
+      field: "paidQty", headerName: "paidQty", width: 70,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{fontWeight:`${params.row.paidQty&&'bold'}`}}>
+                {params.row.paidQty?params.row.paidQty:'pending'}
+          </p>
+        );
+      },
+    },
+    {
+      field: "payment", headerName: "payment", width: 70,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{color:`${params.row.paymentStatus==='paid'?'green':'red'}`}}>
+                {params.row.paymentStatus!=='paid'?'pending':'paid'}
+          </p>
+        );
+      },
+    },
+    {
+      field: "withdrowal", headerName: "withdrowal", width: 100,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{color:`${params.row.storeStatus==='out'?'green':'red'}`}}>
+                {params.row.storeStatus!==''?'pending':'out'}
           </p>
         );
       },

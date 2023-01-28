@@ -12,9 +12,6 @@ import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
 
 import DialogComp from './DialogComp';
 
-// import { fetchUsers, updateUser, deleteUserInfo } from '../../features/userInfo/allUsersSlice';
-
-
 const REQUEST = 'REQUEST';
 const CANCEL = 'CANCEL';
 
@@ -25,7 +22,6 @@ const RequestUser = () => {
   const requestedItems = useSelector(state => state.requested.requestedItems);
 
   const [comment,setComment] = useState(''); 
-
 
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -51,13 +47,13 @@ const RequestUser = () => {
     // TO DO : correction shall be made to the requestedBy property //
     dispatch(requestThis({
       mongoId, requestQty, requestStatus: 'true',
-      // requestedBy: `${user.firstName} ${user.lastName}`,
       requestedBy: `${user.result.firstName} .${String((user.result.lastName)[0]).toLocaleUpperCase()}`,
       requestDate: date.toISOString(),
       modelNo: item.modelNo, purchasePrice: item.purchasePrice,
       sellingPrice: item.sellingPrice, storeQty: item.qty,
       productType: item.productType, productName: item.productName,
-      productId:item.id,clientName,storedDate:item.storedDate,amountRecieved:''
+      productId: item.id, clientName, storedDate: item.storedDate, amountRecieved: '',
+      storeManName:'',dateOut:'',storeStatus:'pending'
     }));
   };
   // COLUMNS FOR REQUESTED ITEMS
@@ -129,9 +125,16 @@ const RequestUser = () => {
         const propId = params.row._id;
         const requestedElement = params.row;
         return (
+          <div>
+            {params.row.paymentStatus !=="paid"?
               <DialogComp idPassed={propId} changeStatus={cancelRequest}
                 status={CANCEL} comment={comment} setComment={setComment} item={requestedElement }
-              ></DialogComp>
+              ></DialogComp> :
+              <p style={{color:'green'}}>paid</p>
+            }
+            
+          </div>
+              
         );
       },
       },
@@ -151,6 +154,37 @@ const RequestUser = () => {
         return (
           <p className="productListItem">
                 {params.row.clientName}
+          </p>
+        );
+      },
+    },
+    
+    {
+      field: "payment", headerName: "payment", width: 70,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{color:`${params.row.paymentStatus==='paid'?'green':'red'}`}}>
+                {params.row.paymentStatus!=='paid'?'pending':'paid'}
+          </p>
+        );
+      },
+    },
+    {
+      field: "paidQty", headerName: "paidQty", width: 70,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{fontWeight:`${params.row.paidQty&&'bold'}`}}>
+                {params.row.paidQty?params.row.paidQty:'pending'}
+          </p>
+        );
+      },
+    },
+    {
+      field: "withdrowal", headerName: "withdrowal", width: 100,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{color:`${params.row.storeStatus==='out'?'green':'red'}`}}>
+                {params.row.storeStatus!==''?'pending':'out'}
           </p>
         );
       },
@@ -211,9 +245,6 @@ const RequestUser = () => {
               <DialogComp idPassed={propId} changeStatus={makeRequest}
                 status={REQUEST} comment={comment} setComment={setComment} item={item }
               ></DialogComp>
-              {/* <DialogComp idPassed={propId} handleDelete={cancelRequest}
-                status={CANCEL}
-              ></DialogComp> */}
               </>
             }
           </>
@@ -231,9 +262,6 @@ const RequestUser = () => {
       <div className="productList"  style={{height:"100vh"}}>
         <div className="productTitleContainer">
             <h2 className="productTitle">Requested Items</h2>
-          {/* <Link to="newEmployee">
-            <button className="productAddButton">Create New User</button>
-          </Link> */}
           </div>
           <DataGrid
             style={{height:'50vh'}}

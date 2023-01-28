@@ -8,6 +8,8 @@ import loginRoutes from './routes/login.js';
 import signupRoutes from './routes/signup.js';
 import deleteUpdateRoutes from './routes/deleteUpdateUser.js';
 import requestRoutes from './routes/request.js'
+import paymentRoutes from './routes/payment.js';
+import historyRoutes from './routes/history.js';
 
 dotenv.config();
 const app = express();
@@ -31,7 +33,10 @@ app.use('/api/updateUser/', deleteUpdateRoutes);
 app.use('/api/makeRequest/', requestRoutes);
 app.use('/api/requestedtems/', requestRoutes);
 app.use('/api/delete-request/', requestRoutes);
-app.use('/api/payment-request/', requestRoutes);
+
+app.use('/api/payment-request/', paymentRoutes);
+
+app.use('/api/historyCreate/', historyRoutes);
 
 const PORT = process.env.PORT||8000;
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
