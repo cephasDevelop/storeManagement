@@ -6,13 +6,16 @@ import WidgetTransaction from "../../adminComponents/widgetTransaction/WidgetTra
 import WidgetUsers from "../../adminComponents/widgetUsers/WidgetUsers";
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
+import { useState } from "react";
 
 const AdminHome = () => {
-  return (
+  const [visibility, setVisibility] = useState(true);
+  
+   return (
     <>
-      <AdminNavBar />
+      <AdminNavBar visibility = {visibility} setVisibility={setVisibility}/>
       <div className="adminHome">        
-        <AdminSideBar />
+        {visibility && <AdminSideBar />}
         <div className="home">        
           <FeaturedInfo />
           <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>

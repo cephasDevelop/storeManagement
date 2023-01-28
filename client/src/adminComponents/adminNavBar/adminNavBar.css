@@ -20,9 +20,15 @@
   font-size: 30px;
   color: darkblue;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .topRight {
+  display: flex;
+  align-items: center;
+}
+
+.topLeft {
   display: flex;
   align-items: center;
 }

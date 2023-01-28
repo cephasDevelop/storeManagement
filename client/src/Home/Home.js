@@ -8,11 +8,13 @@ import { fetchItems } from '../features/items/itemSlice.js';
 const Home = () => {
     const items = useSelector(state => state.item.items);
     const dispatch = useDispatch();
+
     useEffect(() => { 
-        dispatch(fetchItems());
+        dispatch(fetchItems());        
     },[dispatch]);
+    
   return (
-    <Container>
+    <Container style={{marginTop:'30px'}}>
         <Grow in>
           <Grid container justify='space-between' spacing={1} style={{minHeight:'100vh'} }>
                         {!items.length ? <CircularProgress/>:(items.map((item,idx) => (

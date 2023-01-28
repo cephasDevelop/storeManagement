@@ -37,6 +37,10 @@
   padding: 10px;
 }
 
+.addProductItem>textarea {
+  padding: 10px;
+}
+
 .addProductItem>select {
   padding: 10px;
 }

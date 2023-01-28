@@ -48,6 +48,11 @@ const ItemSchema = mongoose.Schema({
         type: String,
         default:"",
     },
+    productType: {
+        type: String,
+        min:2,
+        max:100,
+    },
     image: {
         type: String,
         default:"",
@@ -56,34 +61,10 @@ const ItemSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    
-    
-    requestStatus: {
+    description: {
         type: String,
-        default:''
+        default:"",
     },
-    requestQty: {
-        type: Number,
-        default:0
-    },
-    requestedBy: {
-        type: String,
-        default:''
-    },
-    requestedDate: {
-        type: String,
-        default:''
-    },
-
-
-    paidQty: {
-        type: Number,
-        default:0
-    },
-    storeBalance: {
-        type: Number,
-        default:0
-    }
 });
 
 const ItemData = mongoose.model('ItemData', ItemSchema);

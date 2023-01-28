@@ -11,6 +11,7 @@ export const fetchItems = createAsyncThunk('item/fetchItems', async (_, { reject
     try {
         // const response = await axios.get(`${url}items`);
         const response = await getData();
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log("fetchItems actions api .... error");
