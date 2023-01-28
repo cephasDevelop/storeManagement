@@ -9,8 +9,18 @@
   border-radius: 50%;
 }
 
+.nav-container{
+  margin-bottom: 10px;
+  color:#2c1838;
+}
 
 .link {
   text-decoration: none;
   color: inherit;
+}
+.forgot-password{
+  font-size: 14px;
+}
+.forgot-password :hover{
+  cursor: pointer;
 }

@@ -13,12 +13,15 @@ import ShowData from './ShowData/ShowData.js';
 import SignUp from './SignUp/SignUp.js';
 // import Admin from './Admin/Admin.js';
 
-import Administrator from './Administrator/Administrator.js';
+// import Administrator from './Administrator/Administrator.js';
 import AdminHome from './adminPages/adminHome/AdminHome';
 import ProductList from './adminPages/productList/ProductList';
 import NewProduct from './adminPages/NewProducts/NewProduct';
 import Product from './adminPages/product/Product';
-import FormItem from './FormItem/FormItem.js';
+import Employees from './adminPages/Employees/Employees';
+import NewEmployee from './adminPages/Employees/NewEmployee';
+// import FormItem from './FormItem/FormItem.js';
+
 
 
 function App() {
@@ -38,7 +41,10 @@ function App() {
         <Route path='products' element={ <ProductList/>}/>
         <Route path='product/:productId' element={ <Product/>}/>
         <Route path='newProduct' element={ <NewProduct/>}/>
+
         <Route path="admin" element={<AdminHome />} />
+        <Route path='admin/employees/newEmployee' element={ <NewEmployee/>}/>
+        <Route path="admin/employees" element={<Employees />} />
 
       </Routes>
     <Footer />

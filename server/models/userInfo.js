@@ -29,6 +29,13 @@ const UserSchema = mongoose.Schema({
         min: 4,
         max:15,
     },
+    confirmPassword: {
+        type: String,
+    },
+    active: {
+        type: String,
+        default: true,
+    },
     startedOn: {
         type: String,
         default: new Date().toISOString(),

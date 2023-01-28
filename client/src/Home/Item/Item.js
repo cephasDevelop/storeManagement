@@ -8,7 +8,7 @@ const Item = ({item}) => {
       <CardMedia
               component="img"
               alt={ item.name}
-        style={{height:140}}
+              style={{height:140}}
               image={ item.image}
       />
       <CardContent>
