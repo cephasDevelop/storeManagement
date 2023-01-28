@@ -1,4 +1,7 @@
-import { Box, AppBar, Toolbar, IconButton, Typography, styled} from '@mui/material';
+import {
+  // Box, AppBar, IconButton, Typography,
+  Toolbar, styled
+} from '@mui/material';
 
 export const StyledToolBar = styled(Toolbar) ({
   display: "flex",

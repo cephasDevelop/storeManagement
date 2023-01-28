@@ -4,8 +4,8 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 // import Footer from './Footer/Footer.js';
-import Home from './Home/Home.js';
-import NavBar from './NavBar/NavBar.js';
+// import Home from './Home/Home.js';
+// import NavBar from './NavBar/NavBar.js';
 import Form from './FormItem/FormItem.js';
 import Login from './Login/Login.js';
 

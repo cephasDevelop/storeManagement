@@ -23,7 +23,7 @@ const Product = () => {
     },[dispatch]);
 
     const handleEdit = (id) => {
-       return items.filter((item) => item.id == id)
+       return items.filter((item) => item.id === id)
 
   };
 

@@ -1,4 +1,7 @@
-import React,{useState,useEffect} from 'react';
+import React, {
+  // useState,
+  useEffect
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
@@ -50,9 +53,8 @@ const FinanceUser = () => {
         paymentStatus: 'paid',
         storeStatus:'pending'
       };
-
-      dispatch(makingPayment({...item,...financeObj}));
       dispatch(makeHistory({...item,...financeObj}));
+      dispatch(makingPayment({...item,...financeObj}));
     }
     
     // COLUMNS FOR REQUESTED ITEMS
