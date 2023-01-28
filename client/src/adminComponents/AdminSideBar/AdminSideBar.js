@@ -1,5 +1,6 @@
 import "./adminSideBar.css";
 import {
+
   LineStyle,
   Timeline,
   // TrendingUp,
@@ -14,6 +15,7 @@ import {
   // WorkOutline,
   // Report,
   Password,
+
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -33,10 +35,10 @@ const AdminSideBar = () => {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
+          <h3 className="sidebarTitle">Employee Menu</h3>
           <ul className="sidebarList">
             {/* <Link to="/users" className="link"> */}
-              <li className="sidebarListItem">
+            <li className="sidebarListItem" onClick={() => console.log('users clicked')}>
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>

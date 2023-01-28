@@ -41,9 +41,11 @@ const NavBar = () => {
 });
   
   return (
+
     // <Box sx={{ flexGrow: 1 }} className='nav-container'>
       <AppBar position="static">
         <StyledToolBar>
+
           <IconButton size="large"
             edge="start"
             color="inherit"

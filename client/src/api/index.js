@@ -1,24 +1,45 @@
 import axios from 'axios';
 
-
 const API = axios.create({ baseURL: 'http://localhost:5000/api/' });
 
-// API.interceptors.request.use((req) => {
-//     if (localStorage.getItem('profile')) { 
-//         req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-//     }
-//     return req;
-// });
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('profile')) { 
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+    return req;
+});
 
-// export const fetchItems = () => axios.get(url);
-export const getData = ()=>API.get(`items`);
+export const getData = () => API.get(`items`);
+export const getUsers = () => API.get(`allUsers`);
+
 export const createData = (form) => API.post(`form`, form);
 
 export const logIn = (loginData) => {
-    console.log('data passed to through the API - login');
-    console.log(loginData);
     return API.post(`login`,loginData);
 };
+
+export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
+
+export const updateUserData = (id,active) => API.patch(`updateUser/${id}`, {active});
+
+export const deleteUser = (id) => API.delete(`deleteUser/${id}`);
+
+export const makeRequest = (requestObject) => {
+    console.log('Second API call');
+    console.log('request object = ', requestObject);
+    return API.post(`makeRequest/`, { ...requestObject });
+}
+
+export const getAllRequested = () => API.get(`requestedtems`);
+export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`delete-request/${selfId}`);
+export const makePayment = (payload) => API.put(`payment-request/${payload.id}`, payload);
+
+export const createHistory = (payloadHist) => { 
+    console.log('API HISTORY DATA');
+    console.log(payloadHist);
+    return API.post(`historyCreate`,payloadHist);
+};
+export const getAllHistory = () => { 
+    return API.get(`getHistory`);
+};
 // export const signOut = () => API.get(`logout`);
-
-

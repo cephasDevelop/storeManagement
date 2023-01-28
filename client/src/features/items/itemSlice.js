@@ -1,22 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getData } from '../../api/index.js';
 
-// import axios from 'axios';
-// import { url} from '../../api/index.js'
-// const url = 'http://localhost:5000/api/';
-
 const initialState = {
     loading: false,
     items: [],
     error: ''
 };
-
-//--------------------- JASON PLACEHOLDER ------------------------------
-// export const fetchItems = createAsyncThunk('item/fetchItems', () => {
-//     return axios.get('https://jsonplaceholder.typicode.com/users')
-//         .then((response) => response.data );
-// });
-//---------------------------------------------------
 
 export const fetchItems = createAsyncThunk('item/fetchItems', async (_, { rejectWithValue}) => {
     try {
@@ -25,11 +14,12 @@ export const fetchItems = createAsyncThunk('item/fetchItems', async (_, { reject
         console.log(response.data);
         return response.data;
     } catch (error) {
-        console.log("fetchItems actions api .... error")
-        console.log(error)
+        console.log("fetchItems actions api .... error");
+        console.log(error);
         return rejectWithValue(error.response.data);
     }
 });
+
 
 const itemSlice = createSlice({
     name: 'item',
@@ -46,7 +36,11 @@ const itemSlice = createSlice({
         builder.addCase(fetchItems.rejected, (state,action) => {
             state.loading = false;
             state.error = action.error.message;
-         });
+        });
+        
+
+         
+        
     }
 });
 

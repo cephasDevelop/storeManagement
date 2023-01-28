@@ -166,6 +166,8 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
+    
     },
     {
       id: 2,
@@ -175,6 +177,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 3,
@@ -184,6 +187,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 4,
@@ -193,6 +197,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 5,
@@ -202,6 +207,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 6,
@@ -211,6 +217,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 7,
@@ -220,6 +227,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 8,
@@ -229,6 +237,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 9,
@@ -238,6 +247,7 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
     {
       id: 10,
@@ -247,5 +257,6 @@ export const userData = [
       stock: 123,
       status: "active",
       price: "$120.00",
+      email: "jon@gmail.com",
     },
   ];

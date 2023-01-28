@@ -7,13 +7,15 @@ const Item = ({item}) => {
     <Card elevation={ 6} xs={6} sm={3} style={{margin:0, maxHeight:220}}>
       <CardMedia
               component="img"
-              alt={ item.name}
-        style={{height:140}}
+              alt={ item.ProductName}
+              style={{height:140}}
               image={ item.image}
       />
       <CardContent>
-        <Typography gutterBottom variant="body2" color="text.secondary">{`${item.productName}` }</Typography>
-        <Typography variant="body2" color="red">{ `${item.sellingPrice} ETB`}</Typography>
+
+        <Typography gutterBottom variant="body2" color="text.secondary">{`${item.modelNo}` }</Typography>
+        <Typography variant="body2" color="red">{ `ETB ${item.sellingPrice}`}</Typography>
+
       </CardContent>
     </Card>
   )

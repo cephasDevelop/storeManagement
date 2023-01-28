@@ -2,11 +2,51 @@ import mongoose from 'mongoose';
 
 const ItemSchema = mongoose.Schema({
     idNumber: String,
+    productType: {
+        type: String,
+        // required: true,
+        min:1,
+        max:20,
+    },
+    modelNo: {
+        type: String,
+        // required: true,
+        min:1,
+        max:20,
+    },
     productName: {
         type: String,
-        required: true,
-        min:2,
-        max:100,
+        // required: true,
+        min:1,
+        max:20,
+    },
+    id: {
+        type: String,
+        // required: true,
+        min:1,
+        max:20,
+    },
+    // productId: {
+    //     type: String,
+    //     // required: true,
+    //     min:1,
+    //     max:20,
+    // },
+    purchasePrice: {
+        type: Number,
+        default: 0
+    },
+    sellingPrice: {
+        type: Number,
+        default:0
+    },
+    qty: {
+        type: Number,
+        default:0
+    },
+    description: {
+        type: String,
+        default:"",
     },
     productType: {
         type: String,
@@ -25,14 +65,6 @@ const ItemSchema = mongoose.Schema({
         type: String,
         default:"",
     },
-    id: Number,
-    modelNo: Number,
-    purchasePrice: Number,
-    sellingPrice: Number,
-    qty: Number,
-    requestedQty: Number,
-    paidQty: Number,
-    storeBalance:Number
 });
 
 const ItemData = mongoose.model('ItemData', ItemSchema);

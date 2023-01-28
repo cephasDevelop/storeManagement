@@ -3,7 +3,7 @@ import {Container, Grow, Grid, CircularProgress} from '@mui/material';
 import Item from '../Home/Item/Item.js';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from '../features/items/itemSlice.js'; 
+import { fetchItems } from '../features/items/itemSlice.js';
 
 const Home = () => {
     const items = useSelector(state => state.item.items);
