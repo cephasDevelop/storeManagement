@@ -1,44 +1,66 @@
 import "./productList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../../dummyData";
+// import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItems } from "../../features/items/itemSlice";
 
 const ProductList = () => {
-  const [data, setData] = useState(productRows);
+
+  const items = useSelector(state => state.item.items);
+
+  
+  const [data, setData] = useState(items);
+
+  const dispatch = useDispatch();
+    useEffect(() => { 
+        dispatch(fetchItems());
+    },[dispatch]);
+
+
+
+  // console.log("items ID is: ", items);
+
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "Product ID", width: 90 },
     {
       field: "product",
       headerName: "Product",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            <img className="productListImg" src={params.row.image} alt="" />
+            {params.row.productName}
           </div>
         );
       },
     },
-    { field: "stock", headerName: "Stock", width: 200 },
+    { field: "productType", headerName: "Product Type", width: 120 },
+    { field: "modelNo", headerName: "Model No", width: 120 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      field: "purchasePrice",
+      headerName: "Purchase Price (ETB)",
+      width: 150,
     },
     {
-      field: "price",
-      headerName: "Price",
-      width: 160,
+      field: "sellingPrice",
+      headerName: "Selling Price (ETB)",
+      width: 150,
+    },
+    {
+      field: "qty",
+      headerName: "Quantity",
+      width: 150,
     },
     {
       field: "action",
@@ -74,7 +96,7 @@ const ProductList = () => {
           </Link>
         </div>
         <DataGrid
-          rows={data}
+          rows={items}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}

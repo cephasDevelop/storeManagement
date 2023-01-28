@@ -2,16 +2,18 @@ import "./adminSideBar.css";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
+  // TrendingUp,
   PermIdentity,
   Storefront,
   AttachMoney,
   BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
+  Logout,
+  // MailOutline,
+  // DynamicFeed,
+  // ChatBubbleOutline,
+  // WorkOutline,
+  // Report,
+  Password,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -27,15 +29,7 @@ const AdminSideBar = () => {
               <LineStyle className="sidebarIcon" />
               Home
             </li>
-            </Link>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
-            </li>
+            </Link>            
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -63,7 +57,7 @@ const AdminSideBar = () => {
             </li>
           </ul>
         </div>
-        <div className="sidebarMenu">
+        {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
@@ -79,21 +73,21 @@ const AdminSideBar = () => {
               Messages
             </li>
           </ul>
-        </div>
+        </div> */}
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
+          <h3 className="sidebarTitle">User</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
+            {/* <li className="sidebarListItem">
               <WorkOutline className="sidebarIcon" />
-              Manage
+              Profile
+            </li> */}
+            <li className="sidebarListItem">
+              <Password className="sidebarIcon" />
+              Change Password
             </li>
             <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
-              Reports
+              <Logout className="sidebarIcon" />
+              Logout
             </li>
           </ul>
         </div>

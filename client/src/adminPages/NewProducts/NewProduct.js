@@ -11,11 +11,11 @@ const NewProduct = () => {
   const dispatch = useDispatch();
 
   const [postItems, setPostItems] = useState({
-    productID:'', productType:'', productName:'', modelNo:'', description:'', purchasePrice:'', sellingPrice:'', qty:'', image:'', stock:""
+    id:'', productType:'', productName:'', modelNo:'', description:'', purchasePrice:'', sellingPrice:'', qty:'', image:'', stock:""
   });
   
 
-  const handleClear = () => { setPostItems({productID:'', productType:'', productName:'', modelNo:'', description:'', purchasePrice:'', sellingPrice:'', qty:'', image:'', stock: ''}) }
+  const handleClear = () => { setPostItems({id:'', productType:'', productName:'', modelNo:'', description:'', purchasePrice:'', sellingPrice:'', qty:'', image:'', stock: ''}) }
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +40,7 @@ const NewProduct = () => {
           </div>
           <div className="addProductItem">
             <label>Product ID</label>
-            <input type="text" placeholder="Product ID..." value={postItems.productID} onChange={(e) => setPostItems({ ...postItems, productID: e.target.value })}/>
+            <input type="text" placeholder="Product ID..." required value={postItems.id} onChange={(e) => setPostItems({ ...postItems, id: e.target.value })}/>
           </div>
           <div className="addProductItem">
             <label>Product Type</label>
