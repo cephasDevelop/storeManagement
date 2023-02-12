@@ -53,7 +53,7 @@ const Employees = () => {
       },
     },
     {
-      field: "stock", headerName: "Department", width: 100,
+      field: "stock", headerName: "Dept", width: 50,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -63,7 +63,17 @@ const Employees = () => {
       },
     },
     {
-      field: "status", headerName: "Status", width: 100,
+      field: "company", headerName: "Company", width: 80,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            {`${params.row.company}`}
+          </div>
+        );
+      },
+    },
+    {
+      field: "status", headerName: "Status", width: 60,
       renderCell: (params) => {
         return (
               <div className="productListItem" style={{color:`${params.row.active === 'true'?'black':'red'}`}}>

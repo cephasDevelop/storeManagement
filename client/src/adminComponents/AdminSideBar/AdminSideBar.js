@@ -20,6 +20,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminSideBar = () => {
+
   const navigate = useNavigate();
   const handleLogout = ()=>{
     localStorage.removeItem('profile');
@@ -44,7 +45,7 @@ const AdminSideBar = () => {
           <h3 className="sidebarTitle">Employee Menu</h3>
           <ul className="sidebarList">
             {/* <Link to="/users" className="link"> */}
-            <li className="sidebarListItem" onClick={() => console.log('users clicked')}>
+            <li className="sidebarListItem" onClick={() => navigate('/admin/employees')}>
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
@@ -55,6 +56,13 @@ const AdminSideBar = () => {
                 Products
               </li>
             </Link>
+            <Link to="/admin/editProducts" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Edit Prod.
+              </li>
+            </Link>
+            
             <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               Transactions

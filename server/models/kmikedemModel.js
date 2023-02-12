@@ -1,21 +1,26 @@
 import mongoose from 'mongoose';
 
-const ItemSchema = mongoose.Schema({
+const KmikedemSchema = mongoose.Schema({
+    // idNumber: String,
     modelNo: {
         type: String,
+        // required: true,
         min:1,
         max:20,
     },
     productType: {
         type: String,
+        // required: true,
         min:1,
         max:20,
     },
     productBrand: {
         type: String,
+        // required: true,
         min:1,
         max:20,
     },
+
     qty: {
         type: String,
         default:''
@@ -30,7 +35,8 @@ const ItemSchema = mongoose.Schema({
     },
     company: {
         type:String,
-    },    
+    },
+
     purchasePrice: {
         type: String,
         default: ""
@@ -48,6 +54,6 @@ const ItemSchema = mongoose.Schema({
     }
 });
 
-const ItemData = mongoose.model('ItemData', ItemSchema);
+const KmikedemData = mongoose.model('KmikedemData', KmikedemSchema);
 
-export default ItemData;
+export default KmikedemData;

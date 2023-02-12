@@ -2,78 +2,43 @@ import mongoose from 'mongoose';
 
 const RequestSchema = mongoose.Schema({
     mongoId: String,
-    productType: String,
+    
     modelNo: String,
-    productName: String,
-    productId: String,
+    productType: String,
+    productBrand: String,
+    qty: String,
+    description: String,
+    image: String,
+    company: String,
     purchasePrice: String,
-    sellingPrice: Number,
-    storeQty: Number,
-    clientName: String,
+    sellingPrice: String,
+    retailPrice: String,
     storedDate: String,
     
-    requestStatus: {
-        type: String,
-        default:'true'
-    },
-    requestQty: {
-        type: Number,
-        default:0
-    },
+    
+
+    clientName: String,
+    requestNumber:String,
+    requestQty: String,
     requestedBy: String,
+    requestStatus: String,
     requestDate:String,
-    payerName: {
-        type: String,
-        default:''
-    },
-    paymentProcessedBy:{
-        type: String,
-        default:''
-    },
-    paymentType:{
-        type: String,
-        default:''
-    },
-    checkNo:{
-        type: String,
-        default:''
-    },
-    checkExpiresAt: {
-        type: String,
-        default:''
-    },
-    invoiceNo: {
-        type: String,
-        default:''
-    },
-    invoiceDate: {
-        type: String,
-        default:''
-    },
-    priceUsed: {
-        type: String,
-        default:''
-    },
-    paidQty: {
-        type: String,
-        default:''
-    },
-    paymentStatus: {
-        type: String,
-        default:''
-    },
-    amountRecieved: {
-        type: String,
-        default:''
-    },
-    storeManName: {
-        type: String,
-        default:''
-    },
-    dateOut: {
-        type: String,
-        default:''
-    },
+    
+
+    payerName: String,
+    paymentProcessedBy:String,
+    paymentType:String,
+    checkNo:String,
+    checkExpiresAt:String,
+    invoiceNo:String,
+    invoiceDate:String,
+    priceUsed: String,
+    paidQty: {type:String,default:''},
+    paymentStatus: {type:String,default:''},
+    amountRecieved:String,
+    
+    storeManName: String,
+    dateOut: String,
     storeStatus: {
         type: String,
         default:''

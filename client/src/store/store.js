@@ -7,6 +7,11 @@ import signupReducer from '../features/userInfo/signUpInSlice.js';
 import allUsersReducer from '../features/userInfo/allUsersSlice.js';
 import requestReducer from '../features/requestSlice/requestSlice.js';
 import historyReducer from '../features/historySlice/historySlice.js';
+import kkgwReducer from '../features/companySlice/kkgwSlice.js';
+import kmikedemReducer from '../features/companySlice/kmikedemSlice.js';
+
+import companyReducer from '../features/companySlice/companySlice.js';
+import productListReducer from '../features/companySlice/productListSlice.js';
 
 const store = configureStore({
     reducer: {
@@ -15,7 +20,13 @@ const store = configureStore({
         userAdded: signupReducer,
         users: allUsersReducer,
         requested: requestReducer,
-        history:historyReducer
+        history:historyReducer,
+
+        kkgwItem: kkgwReducer,
+        kmikedemItem: kmikedemReducer,
+        
+        totalCompanyItems:companyReducer,
+        purchasedProductsList:productListReducer,
     }
 });
 

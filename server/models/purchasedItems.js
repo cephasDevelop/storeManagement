@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ItemSchema = mongoose.Schema({
+const PurchasedItemsSchema = mongoose.Schema({
     modelNo: {
         type: String,
         min:1,
@@ -16,6 +16,7 @@ const ItemSchema = mongoose.Schema({
         min:1,
         max:20,
     },
+
     qty: {
         type: String,
         default:''
@@ -30,7 +31,8 @@ const ItemSchema = mongoose.Schema({
     },
     company: {
         type:String,
-    },    
+    },
+    
     purchasePrice: {
         type: String,
         default: ""
@@ -43,11 +45,12 @@ const ItemSchema = mongoose.Schema({
         type: String,
         default:""
     },
+    
     storedDate: {
         type: Date,
     }
 });
 
-const ItemData = mongoose.model('ItemData', ItemSchema);
+const PurchasedItems = mongoose.model('PurchasedItems', PurchasedItemsSchema);
 
-export default ItemData;
+export default PurchasedItems;

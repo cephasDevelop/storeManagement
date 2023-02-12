@@ -25,6 +25,8 @@ import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
 
+import EditProducts from './adminPages/EditProduct/EditProducts.js';
+
 function App() {
   return (
     <div style={{minHeight:'100vh'}}>
@@ -47,6 +49,8 @@ function App() {
         <Route path="admin/employees" element={<Employees />} />
         <Route path="request" element={<RequestUser />} />
         <Route path="finance" element={<FinanceUser />} />
+        <Route path="admin/editProducts" element={<EditProducts />} />
+
 
       </Routes>
     {/* <Footer /> */}

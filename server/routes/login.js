@@ -1,6 +1,9 @@
 import express from 'express';
 
-import { login,getUsers,updateUserStatus} from '../controllers/users.js';
+import {
+    login, getUsers
+    // , updateUserStatus
+} from '../controllers/users.js';
 
 const router = express.Router();
 

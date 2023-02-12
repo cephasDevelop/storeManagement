@@ -1,10 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 // import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
-import { fetchItems } from '../features/items/itemSlice.js';
+// import { fetchItems } from '../features/items/itemSlice.js';
 import { deleteRequest,requestThis,getRequestedItems } from '../features/requestSlice/requestSlice.js';
+import { getAllCompanyItems } from '../features/companySlice/companySlice.js'; 
+
 
 import AdminNavBar from "../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
@@ -19,49 +22,52 @@ let user;
 const RequestUser = () => {
 
   const dispatch = useDispatch();
-  const items = useSelector(state => state.item.items);
+  // const items = useSelector(state => state.item.items);
+  const bothCompanyItems = useSelector(state => state.totalCompanyItems.allCompanyItems);
   const requestedItems = useSelector(state => state.requested.requestedItems);
 
   const [comment,setComment] = useState(''); 
 
-  // const [user, setUser] = useState({});
   useEffect(() => {
     user = JSON.parse(localStorage.getItem('profile'));
-    // if (userStored) {
-    //   setUser(userStored);
-    // }
   },[]);
 
   useEffect(() => { 
     dispatch(getRequestedItems());
-    dispatch(fetchItems());
+    dispatch(getAllCompanyItems()); 
   }, [dispatch]);
 
-  
-  
   const cancelRequest = (selfId,fromMongoId) => {
     dispatch(deleteRequest({selfId,fromMongoId}));
   };
 
-  const makeRequest = (mongoId, requestQty,clientName, { item }) => {
+  const makeRequest = (mongoId, requestQty,requestNumber,clientName, { item }) => {
     const date = new Date();
     // TO DO : correction shall be made to the requestedBy property //
     dispatch(requestThis({
-      mongoId, requestQty, requestStatus: 'true',
-      requestedBy: `${user.result.firstName} .${String((user.result.lastName)[0]).toLocaleUpperCase()}`,
+      mongoId,
+
+      modelNo: item.modelNo, productType: item.productType, productBrand: item.productBrand,
+      qty: item.qty, image: item.image, company:item.company,
+      purchasePrice: item.purchasePrice, sellingPrice: item.sellingPrice, retailPrice:item.retailPrice,
+      storedDate: item.storedDate,
+
+      clientName:clientName.toUpperCase(),
+      requestNumber,
+      requestQty,
+      requestedBy: `${user.result.firstName} .${String((user.result.lastName)[0]).toUpperCase()}`,
+      requestStatus: 'true',
       requestDate: date.toISOString(),
-      modelNo: item.modelNo, purchasePrice: item.purchasePrice,
-      sellingPrice: item.sellingPrice, storeQty: item.qty,
-      productType: item.productType, productName: item.productName,
-      productId: item.id, clientName, storedDate: item.storedDate, amountRecieved: '',
-      storeManName:'',dateOut:'',storeStatus:'pending'
+    
+      paymentStatus:'pending',
+      storeStatus: 'pending'
     }));
   };
   // COLUMNS FOR REQUESTED ITEMS
   const requestedColumns = [
-    { field: "id", headerName: "ID", width: 15 },
+    { field: "id", headerName: "ID", width: 10 },
     {
-      field: "product type", headerName: "type", width: 70,
+      field: "productType", headerName: "type", width: 80,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -71,7 +77,7 @@ const RequestUser = () => {
       },
       },
     {
-      field: "model", headerName: "model No.", width: 130,
+      field: "model", headerName: "model No.", width: 80,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -81,27 +87,37 @@ const RequestUser = () => {
       },
     },
     {
-      field: "stock", headerName: "stock", width: 50,
+      field: "company", headerName: "from.", width: 80,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {`${params.row.storeQty}`}
+            {`${params.row.company}`}
           </div>
         );
       },
     },
     {
-      field: "reqStatus", headerName: "requested", width: 80,
+      field: "stock", headerName: "stock", width: 50,
       renderCell: (params) => {
         return (
-              <div className="productListItem" style={{color:`${(params.row.requestStatus === 'true')?'red':'black'}`}}>
-                {(!params.row.requestStatus === 'true')?'No':'Yes'}
-              </div>
+          <div className="productListItem">
+            {`${params.row.qty}`}
+          </div>
         );
       },
-      },
+    },
+    // {
+    //   field: "reqStatus", headerName: "req.stat", width: 65,
+    //   renderCell: (params) => {
+    //     return (
+    //           <div className="productListItem" style={{color:`${(params.row.requestStatus === 'true')?'red':'black'}`}}>
+    //             {(!params.row.requestStatus === 'true')?'No':'Yes'}
+    //           </div>
+    //     );
+    //   },
+    //   },
     {
-      field: "reqQty", headerName: "req.Qty", width: 80,
+      field: "reqQty", headerName: "req.Qty", width: 60,
       renderCell: (params) => {
         return (
               <div className="productListItem" style={{color:`${(params.row.requestStatus === 'true')?'red':'black'}`}}>
@@ -115,7 +131,7 @@ const RequestUser = () => {
       renderCell: (params) => {
         return (
               <div className="productListItem">
-                {`${Number(params.row.sellingPrice).toFixed(2)}`}
+                {`${Number(params.row.retailPrice).toFixed(2)}`}
               </div>
         );
       },
@@ -138,7 +154,17 @@ const RequestUser = () => {
               
         );
       },
+    },
+      {
+      field: "time", headerName: "Requested Time", width: 130,
+      renderCell: (params) => {
+        return (
+          <p className="productListItem" style={{color:'red'}}>
+                {moment(params.row.requestDate).fromNow()}
+          </p>
+        );
       },
+    },
     {
       field: "requestedBy", headerName: "requestedBy", width: 100,
       renderCell: (params) => {
@@ -205,7 +231,7 @@ const RequestUser = () => {
       },
       },
     {
-      field: "model", headerName: "model No.", width: 130,
+      field: "model", headerName: "model No.", width: 100,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -215,21 +241,39 @@ const RequestUser = () => {
       },
     },
     {
-      field: "stock", headerName: "stock", width: 50,
+      field: "company", headerName: "from", width: 100,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {`${params.row.qty}`}
+            {
+              params.row.company === "KMikedem" ?
+                <span style={{ fontWeight: "bold", color: "green" }}>{`${params.row.company}`}</span>
+                :<span style={{ fontWeight: "bold", color: "blue" }}>{`${params.row.company}`}</span>
+            }
           </div>
         );
       },
     },
     {
-      field: "sellingPrice", headerName: "sellingPrice", width: 100,
+      field: "stock", headerName: "stock", width: 50,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            {
+              params.row.company === "KMikedem" ?
+                <span style={{ fontWeight: "bold", color: "green" }}>{`${params.row.qty}`}</span>
+                :<span style={{ fontWeight: "bold", color: "blue" }}>{`${params.row.qty}`}</span>
+            }
+          </div>
+        );
+      },
+    },
+    {
+      field: "sellingPrice", headerName: "retailPrice", width: 100,
       renderCell: (params) => {
         return (
               <div className="productListItem">
-                {`${Number(params.row.sellingPrice).toFixed(2)}`}
+                {`${Number(params.row.retailPrice).toFixed(2)}`}
               </div>
         );
       },
@@ -241,10 +285,10 @@ const RequestUser = () => {
         const item = params.row;
         return (
           <>
-            {params.row.department !== 'admin'&&
+            {params.row.department !== 'admin'&&// DEPARTMENT SHALL BE CONVERTED TO 'teller'
               <>
               <DialogComp idPassed={propId} changeStatus={makeRequest}
-                status={REQUEST} comment={comment} setComment={setComment} item={item }
+                status={REQUEST} comment={comment} item={item } itemRequested={requestedItems}
               ></DialogComp>
               </>
             }
@@ -280,7 +324,7 @@ const RequestUser = () => {
           </div>
           <DataGrid
             style={{ height: '60vh' }}
-            rows={items.map((value, idx) => {
+            rows={bothCompanyItems.map((value, idx) => {
               let id = idx + 1;
               return { ...value, id };
             })}

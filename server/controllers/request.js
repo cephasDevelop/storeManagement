@@ -12,10 +12,7 @@ export const fetchRequestedItems = async (req, res) => {
 };
 
 
-// mongoId, requestQty, requestStatus, requestedBy,
-//             requestDate, modelNo, purchasePrice, sellingPrice,
-//             storeQty, productType, productName, productId,
-//             clientName, storedDate
+
 export const createRequest = async (req, res) => { 
     try {
         const payload = req.body;

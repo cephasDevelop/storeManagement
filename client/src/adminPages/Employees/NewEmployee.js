@@ -30,6 +30,7 @@ const departmentNames = [
   'store',
   'user'
 ];
+const companyNames = ['KMikedem','KKGW'];
 
 const NewEmployee = () => {
 
@@ -38,12 +39,12 @@ const NewEmployee = () => {
 
     const [createUser, setCreateUser] = useState({
         firstName: '', lastName: '',confirmPassword:'',
-        department: '', email: '', password: ''
+        department: '',company:'', email: '', password: ''
     });
 
     const handleClearInfo = () => setCreateUser({
         firstName: '', lastName: '',confirmPassword:'',
-        department: '', email: '', password: ''
+        department: '',company:'', email: '', password: ''
     });
 
     const handleChange = (e) => {
@@ -73,7 +74,40 @@ const NewEmployee = () => {
           <Grid container justify='space-between' spacing={ 3} style={{minHeight:'100vh'} }>
             <Grid item justify="space-between" xs={12} sm={9} >
               <Paper>
-                <form autoComplete='off' noValidate onSubmit={handleSubmit}>                  
+                  <form autoComplete='off' noValidate onSubmit={handleSubmit}> 
+                      
+                  <FormControl fullWidth>
+                    <InputLabel id="select-company">select company name</InputLabel>                      
+                    <Select
+                      name='company'
+                      labelId="select-company"
+                      fullWidth
+                      displayEmpty
+                      value={createUser.company}
+                      onChange={handleChange}
+                      input={<OutlinedInput />}
+                      renderValue={(selected) => {
+                        if (selected.length === 0) {
+                          return <em></em>;
+                        }
+                        return selected;
+                      }}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem disabled value="">
+                        <em>select company name</em>
+                      </MenuItem>
+                      {companyNames.map((name,idx) => (
+                        <MenuItem
+                          key={idx}
+                          value={name}
+                        >
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                      
                   <FormControl fullWidth>
                     <InputLabel id="select-label">select department</InputLabel>                      
                     <Select

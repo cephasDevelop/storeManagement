@@ -19,6 +19,7 @@ const departmentNames = [
   'store',
   'user'
 ];
+const companyNames = ['KMikedem','KKGW'];
 
 
 const Login = () => {
@@ -26,11 +27,11 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [loginData, setLoginData] = useState({ firstName: '', department: '', email: '', password: '' });
+  const [loginData, setLoginData] = useState({ firstName: '', department: '',company:'', email: '', password: '' });
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClearInfo = () => setLoginData({ firstName: '', department: '', email: '', password: '' });
+  const handleClearInfo = () => setLoginData({ firstName: '', department: '',company:'', email: '', password: '' });
   
   const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
   const handleMouseDownPassword = (event) => {
@@ -47,11 +48,6 @@ const Login = () => {
     handleClearInfo();
   }
   
-  // useEffect(() => { 
-  //   navigate('/adminPage');
-  // },[dispatch]);
-  
-
   return (
     <Container>
       <Grow in>
@@ -61,7 +57,37 @@ const Login = () => {
               <Paper>
                 <form autoComplete='off' noValidate onSubmit={handleSubmit}>
                   <Typography variant='h6' align='center' color='primary'>Log in</Typography>
-                  
+                  <FormControl fullWidth>
+                    <InputLabel id="select-company">select company name</InputLabel>                      
+                    <Select
+                      name='company'
+                      labelId="select-company"
+                      fullWidth
+                      displayEmpty
+                      value={loginData.company}
+                      onChange={handleChange}
+                      input={<OutlinedInput />}
+                      renderValue={(selected) => {
+                        if (selected.length === 0) {
+                          return <em></em>;
+                        }
+                        return selected;
+                      }}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem disabled value="">
+                        <em>select company name</em>
+                      </MenuItem>
+                      {companyNames.map((name) => (
+                        <MenuItem
+                          key={name}
+                          value={name}
+                        >
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <FormControl fullWidth>
                     <InputLabel id="select-label">select department</InputLabel>                      
                     <Select

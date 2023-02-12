@@ -7,11 +7,14 @@ import mongoose from "mongoose";
 dotenv.config();
 export const login = async (req, res) => {
     try {
-        const { firstName, department, email, password } = req.body;
+        const { firstName, department,company, email, password } = req.body;
         console.log('the requested data - ', req.body);
 
-        const user = await UserInfo.findOne({ department: department, email: email, firstName: firstName });
+        const user = await UserInfo.findOne({ department: department, company: company, email: email, firstName: firstName });
+        console.log("the user found");
+        if(user)console.log(user);
         if (!user.department) return res.status(404).json({ message: 'User does not exist.' });
+        if (!user.company) return res.status(404).json({ message: 'Not the correct company.' });
         if(user.active === 'false') return res.status(404).json({ message: 'User temporarly suspended.' });
         console.log('found the user fron DB - ', user);
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -20,7 +23,7 @@ export const login = async (req, res) => {
         
         const token = jwt.sign({
             name: `${user.firstName}${user.lastName}`,
-            department: user.department, id: user._id
+            department: user.department,company:user.company, id: user._id
         }, process.env.SECRET_TOKEN, { expiresIn: '4h' });
         
         // NOTE USER HAS A PASSWORD IN IT. PASSWORD SHALL NOT BE SENT TO THE FRONTEND
@@ -32,9 +35,9 @@ export const login = async (req, res) => {
 
 export const signUpAdmin = async (req, res) => {
     try {
-        const { firstName, lastName, department, email, password, confirmPassword } = req.body;
+        const { firstName, lastName, department,company, email, password, confirmPassword } = req.body;
         console.log('req.body = ', req.body);
-        const existingUser = await UserInfo.find({ department: department, email: email, firstName: firstName, lastName: lastName });
+        const existingUser = await UserInfo.find({ department: department,company:company, email: email, firstName: firstName, lastName: lastName });
         
         if (existingUser.department) return res.status(400).json({ message: 'User already exists.' });
         if (password !== confirmPassword) return res.status(400).json({ message: 'Please confirm password' });
@@ -42,13 +45,13 @@ export const signUpAdmin = async (req, res) => {
         
         let result = new UserInfo({
             firstName, lastName, confirmPassword: hashedPassword,
-            department, email, password: hashedPassword
+            department,company, email, password: hashedPassword
         });
         result = await result.save();
         
         const token = jwt.sign({
             name: `${result.firstName}${result.lastName}`,
-            department: result.department, id: result._id
+            department: result.department,company:result.company, id: result._id
         }, process.env.SECRET_TOKEN, { expiresIn: '4h' });
 
         res.status(200).json({ result, token });
