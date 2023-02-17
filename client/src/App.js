@@ -4,8 +4,8 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 // import Footer from './Footer/Footer.js';
-import Home from './Home/Home.js';
-import NavBar from './NavBar/NavBar.js';
+// import Home from './Home/Home.js';
+// import NavBar from './NavBar/NavBar.js';
 import Form from './FormItem/FormItem.js';
 import Login from './Login/Login.js';
 
@@ -21,9 +21,12 @@ import Product from './adminPages/product/Product';
 import Employees from './adminPages/Employees/Employees';
 import NewEmployee from './adminPages/Employees/NewEmployee';
 // import FormItem from './FormItem/FormItem.js';
+import StoreUser from './StoreUser/Store';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
+
+import EditProducts from './adminPages/EditProduct/EditProducts.js';
 
 function App() {
   return (
@@ -47,6 +50,9 @@ function App() {
         <Route path="admin/employees" element={<Employees />} />
         <Route path="request" element={<RequestUser />} />
         <Route path="finance" element={<FinanceUser />} />
+        <Route path="store" element={<StoreUser />} />
+        <Route path="admin/editProducts" element={<EditProducts />} />
+
 
       </Routes>
     {/* <Footer /> */}

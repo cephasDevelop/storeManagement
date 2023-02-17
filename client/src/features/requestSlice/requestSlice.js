@@ -20,9 +20,7 @@ export const deleteRequest = createAsyncThunk('request/deleteRequest', async ({ 
 
 export const requestThis = createAsyncThunk('request/requestThis', async (request, { rejectWithValue}) => {
     try {
-        // const response = await axios.get(`${url}items`);
-        console.log('Request Made');
-        console.log('First API call - ',request);
+        console.log('Making Request - ',request);
         const response = await makeRequest(request);
         return response.data;
 

@@ -91,7 +91,7 @@ export default function AlertDialogSlide(
         <div>
           <form autoComplete='off' noValidate onSubmit={(e) => handleAgree(e)}>
             <Typography align='center'> <span style={{ fontWeight:'bold' }}>{ `Client Name `}</span>{ `: ${item.clientName}`}</Typography>
-            <Typography align='center'> <span style={{ fontWeight:'bold' }}>{ `Minimum Sellling Price `}</span>{ `: ${(item.sellingPrice).toFixed(2)} ETB`}</Typography>
+            <Typography align='center'> <span style={{ fontWeight:'bold' }}>{ `Minimum Sellling Price `}</span>{ `: ${Number(item.sellingPrice).toFixed(2)} ETB`}</Typography>
             <Typography align='center'> <span style={{ fontWeight:'bold' }}>{ `The Requested Qty `}</span>{`: ${item.requestQty} Pcs`}</Typography>
             <Typography align='center'> <span style={{ fontWeight:'bold' }}>{ `Expected Amount `}</span>{ `: ${(Number(item.sellingPrice)*Number(item.requestQty)).toFixed(2)} ETB`}</Typography>
             

@@ -1,8 +1,11 @@
 import "./adminSideBar.css";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
+import UpdateIcon from '@mui/icons-material/Update';
 import {
 
   LineStyle,
-  Timeline,
+  // Timeline,
   // TrendingUp,
   PermIdentity,
   Storefront,
@@ -20,6 +23,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminSideBar = () => {
+
   const navigate = useNavigate();
   const handleLogout = ()=>{
     localStorage.removeItem('profile');
@@ -44,7 +48,7 @@ const AdminSideBar = () => {
           <h3 className="sidebarTitle">Employee Menu</h3>
           <ul className="sidebarList">
             {/* <Link to="/users" className="link"> */}
-            <li className="sidebarListItem" onClick={() => console.log('users clicked')}>
+            <li className="sidebarListItem" onClick={() => navigate('/admin/employees')}>
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
@@ -55,10 +59,36 @@ const AdminSideBar = () => {
                 Products
               </li>
             </Link>
-            <li className="sidebarListItem">
+            <Link to="/admin/editProducts" className="link">
+              <li className="sidebarListItem">
+                <UpdateIcon className="sidebarIcon" />
+                Edit Prod.
+              </li>
+            </Link>
+            
+            {/* <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               Transactions
-            </li>
+            </li> */}
+            
+            <Link to="/request" className="link">
+              <li className="sidebarListItem">
+                <AddShoppingCartIcon className="sidebarIcon" />
+                Request
+              </li>
+            </Link>
+            <Link to="/finance" className="link">
+              <li className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                Finance
+              </li>
+            </Link>
+            <Link to="/store" className="link">
+              <li className="sidebarListItem">
+                <StoreIcon className="sidebarIcon" />
+                Store
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports

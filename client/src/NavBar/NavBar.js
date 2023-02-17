@@ -1,12 +1,15 @@
 import React, { useState} from 'react';
-import { Box, AppBar, Toolbar, IconButton, Typography, InputBase, Button} from '@mui/material';
+import {
+  // Box, Toolbar,
+  AppBar, IconButton, Typography, InputBase, Button
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 // import { Search, SearchIconWrapper, StyledInputBase } from '../styleApp.js';
 import { StyledToolBar, Search } from './StyledNav.js';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+// import { purple } from '@mui/material/colors';
 
 import '../App.css';
 import { useNavigate } from 'react-router-dom';

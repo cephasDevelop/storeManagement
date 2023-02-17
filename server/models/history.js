@@ -77,6 +77,25 @@ const historySchema = mongoose.Schema({
         type: String,
         default:''
     },
+    idNumber: String,
+   //---------------
+    id: {
+        type: String,
+        min:1,
+        max:20,
+    },
+    qty: {
+        type: String,
+        default:''
+    },
+    image: {
+        type: String,
+        default:"",
+    },
+    description: {
+        type: String,
+        default:"",
+    },
 });
 
 const HistoryData = mongoose.model('HistoryData', historySchema);

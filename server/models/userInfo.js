@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
         required: true,
         max:15,
     },
+    company: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
