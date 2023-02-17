@@ -14,7 +14,7 @@ const Item = ({item}) => {
       <CardContent>
 
         <Typography gutterBottom variant="body2" color="text.secondary">{`${item.modelNo}` }</Typography>
-        <Typography variant="body2" color="red">{ `ETB ${item.sellingPrice}`}</Typography>
+        <Typography variant="body2" color="red">{ `ETB ${item.retailPrice}`}</Typography>
 
       </CardContent>
     </Card>

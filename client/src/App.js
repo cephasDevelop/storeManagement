@@ -21,6 +21,7 @@ import Product from './adminPages/product/Product';
 import Employees from './adminPages/Employees/Employees';
 import NewEmployee from './adminPages/Employees/NewEmployee';
 // import FormItem from './FormItem/FormItem.js';
+import StoreUser from './StoreUser/Store';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
@@ -49,6 +50,7 @@ function App() {
         <Route path="admin/employees" element={<Employees />} />
         <Route path="request" element={<RequestUser />} />
         <Route path="finance" element={<FinanceUser />} />
+        <Route path="store" element={<StoreUser />} />
         <Route path="admin/editProducts" element={<EditProducts />} />
 
 

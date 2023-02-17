@@ -23,7 +23,7 @@ export const createProductlist = async (req, res) => {
         let form = new PurchasedItems({
             modelNo, productType, productBrand, qty,
             description, image, company,
-            purchasePrice, sellingPrice, retailPrice,storedDate
+            purchasePrice, sellingPrice, retailPrice,storedDate,qtyRemaining:qty,
         });
 
         form = await form.save();

@@ -1,6 +1,4 @@
-// import "./productList.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import {
@@ -12,20 +10,13 @@ import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
 import { useDispatch, useSelector } from "react-redux";
 import DialogComp from './DialogComp.js';
 
-// import { getAllCompanyItems } from '../../features/companySlice/companySlice.js';
 import { getListOfPurchasedProducts, deletePurchasedProduct } from '../../features/companySlice/productListSlice.js';
 const EditProducts = () => {
   const dispatch = useDispatch();
 
-//   const companyItems = useSelector(state => state.totalCompanyItems.allCompanyItems);
     const purchasedProducts = useSelector(state=>state.purchasedProductsList.allProductsList);
   
-  useEffect(() => { 
-    // dispatch(fetchItems());
-    // dispatch(getKmikedemItems());
-    // dispatch(getKkgwItems());
-    //   dispatch(getAllCompanyItems());
-      
+  useEffect(() => {       
       dispatch(getListOfPurchasedProducts());  
   },[dispatch]);
 
@@ -43,7 +34,7 @@ const EditProducts = () => {
   };
 
   const columns = [
-    // { field: "id", headerName: "Product ID", width: 90 },
+    { field: "id", headerName: "ID", width: 15 },
     {
       field: "product",
       headerName: "Product",

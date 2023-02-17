@@ -45,7 +45,28 @@ const PurchasedItemsSchema = mongoose.Schema({
         type: String,
         default:""
     },
-    
+
+
+    qtyRemaining:String,// follow the qty remain to be sold
+    paymentsMade: [
+        {
+            payerName: String,
+            financeName: String,
+            paymentType: String,// check or cash
+            checkExpiresAt: String,// Date of check expiration
+            invoiceNo: String,
+            checkNo: String,
+            // checkDiposited:String,// when money is recieved it will be true, else false
+            requestNumber: String,
+            requestedBy:String,
+            
+            qtyPaid: String,
+            priceUsed: String,
+            amountRecieved: String,
+            amountPurchased:String,
+            datePaid: String,
+        },
+    ],
     storedDate: {
         type: Date,
     }

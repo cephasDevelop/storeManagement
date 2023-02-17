@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllProductListData,editProductListData,deleteProductListData} from '../../api/index.js';
+import {
+    getAllProductListData, editProductListData,
+    deleteProductListData, makeindividualPayments
+} from '../../api/index.js';
 
 
 const initialState = {
@@ -37,6 +40,17 @@ export const deletePurchasedProduct = createAsyncThunk('allProductsList/deletePu
         return response.data;
     } catch (error) {
         console.log("delete product list actions api .... error")
+        console.log(error)
+        return rejectWithValue(error.response.data);
+    }
+}); 
+export const individualPayments = createAsyncThunk('allProductsList/individualPayments', async(obj, { rejectWithValue}) => {
+    try {
+        const response = await makeindividualPayments(obj);
+        console.log('makeindividualPayments = ',response.data);
+        return response.data;
+    } catch (error) {
+        console.log("makeindividualPayments actions api .... error")
         console.log(error)
         return rejectWithValue(error.response.data);
     }
@@ -78,6 +92,18 @@ const productListSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(deletePurchasedProduct.rejected, (state,action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
+
+        builder.addCase(individualPayments.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(individualPayments.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(individualPayments.rejected, (state,action) => {
             state.loading = false;
             state.error = action.error.message;
         });

@@ -63,7 +63,9 @@ app.use('/api/makeRequest/', requestRoutes);
 app.use('/api/requestedtems/', requestRoutes);
 app.use('/api/delete-request/', requestRoutes);
 
-app.use('/api/payment-request/', paymentRoutes);
+app.use('/api/paymentRequest/', paymentRoutes);
+app.use('/api/individualPayments',historyRoutes);
+
 
 app.use('/api/historyCreate/', historyRoutes);
 

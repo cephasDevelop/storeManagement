@@ -6,9 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
-import { fetchItems } from '../features/items/itemSlice.js';
-import { getRequestedItems, makingPayment } from '../features/requestSlice/requestSlice.js';
-import { makeHistory } from '../features/historySlice/historySlice.js';
+// import { fetchItems } from '../features/items/itemSlice.js';
+import { getAllCompanyItems } from '../features/companySlice/companySlice.js'; 
+import {
+  getRequestedItems,
+  // makingPayment
+} from '../features/requestSlice/requestSlice.js';
+import { individualPayments } from '../features/companySlice/productListSlice.js';
+// import { makeHistory } from '../features/historySlice/historySlice.js';
 import AdminNavBar from "../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../adminComponents/AdminSideBar/AdminSideBar";
 import DialogComp from './DialogComp';
@@ -17,22 +22,25 @@ let user;
 const FinanceUser = () => {
 
   const dispatch = useDispatch();
-  const items = useSelector(state => state.item.items);
+  // const items = useSelector(state => state.item.items);
+  // const requestedItems = useSelector(state => state.requested.requestedItems);
+
+  const bothCompanyItems = useSelector(state => state.totalCompanyItems.allCompanyItems);
   const requestedItems = useSelector(state => state.requested.requestedItems);
 
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
   useEffect(() => {
     dispatch(getRequestedItems());
-    dispatch(fetchItems());
+    dispatch(getAllCompanyItems());
   }, [dispatch]);
 
   useEffect(() => {
     user = JSON.parse(localStorage.getItem('profile'));
-
   }, []);
 
   const makePayment = (idPassed, paymentInfo, item) => {
+    const paymentDate = new Date().toISOString();
+    console.log("date of payment = ",paymentDate);
 
     const financeObj = {
       id: idPassed,
@@ -46,65 +54,54 @@ const FinanceUser = () => {
       invoiceDate: paymentInfo.invoiceDate,
       amountRecieved: paymentInfo.amount,
       checkExpiresAt: paymentInfo.checkExpiresAt,
+      paymentDate,
       paymentStatus: 'paid',
       storeStatus: 'pending'
     };
-    dispatch(makingPayment({ ...item, ...financeObj }));
-    storeHistory({ ...item, ...financeObj });
     // dispatch(makingPayment({ ...item, ...financeObj }));
-  }
-  const storeHistory = (obj) => {
-    dispatch(makeHistory({ ...obj}));
+    dispatch(individualPayments({ ...item, ...financeObj }));
 
-  };
+
+    // dispatch(makeHistory({ ...obj}));  
+  }
+
+  // const storeHistory = (obj) => {
+  //   dispatch(makeHistory({ ...obj}));
+  // };
+
+
   // COLUMNS FOR REQUESTED ITEMS
   const requestedColumns = [
     { field: "id", headerName: "ID", width: 15 },
     {
-      field: "product type", headerName: "type", width: 70,
+      field: "productType", headerName: "type", width: 70,
       renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {`${params.row.productType}`}
-          </div>
-        );
+        return (<div className="productListItem">{`${params.row.productType}`}</div>);
       },
     },
     {
-      field: "model", headerName: "model No.", width: 130,
+      field: "model", headerName: "model No.", width: 100,
       renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {`${params.row.modelNo}`}
-          </div>
-        );
+        return (<div className="productListItem">{`${params.row.modelNo}`}</div>);
       },
     },
     {
       field: "stock", headerName: "stock", width: 50,
       renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {`${params.row.storeQty}`}
-          </div>
-        );
+        return (<div className="productListItem">{`${params.row.qty}`}</div>);
       },
     },
     {
-      field: "reqStatus", headerName: "requested", width: 80,
+      field: "company", headerName: "from", width: 80,
       renderCell: (params) => {
-        return (
-          <div className="productListItem" style={{ color: `${(params.row.requestStatus === 'true') ? 'red' : 'black'}` }}>
-            {(!params.row.requestStatus === 'true') ? 'No' : 'Yes'}
-          </div>
-        );
+        return (<div className="productListItem" style={{ fontWeight:'bold'}}>{params.row.company }</div>);
       },
     },
     {
       field: "reqQty", headerName: "req.Qty", width: 80,
       renderCell: (params) => {
         return (
-          <div className="productListItem" style={{ color: `${(params.row.requestStatus === 'true') ? 'red' : 'black'}` }}>
+          <div className="productListItem" style={{ color: `${(params.row.requestStatus === 'pending') ? 'red' : 'black'}` }}>
             {params.row.requestQty}
           </div>
         );
@@ -113,11 +110,7 @@ const FinanceUser = () => {
     {
       field: "price", headerName: "price", width: 100,
       renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {`${Number(params.row.sellingPrice).toFixed(2)}`}
-          </div>
-        );
+        return (<div className="productListItem">{`${params.row.sellingPrice}`}</div>);
       },
     },
     {
@@ -127,36 +120,25 @@ const FinanceUser = () => {
         const requestedElement = params.row;
         return (
           <div>
-            {params.row.paymentStatus !== 'paid' ?
+            {params.row.paymentStatus === 'pending' ?
               <DialogComp idPassed={propId} changePaymentStatus={makePayment} item={requestedElement} user={user}
               ></DialogComp> :
               <p style={{ color: 'green' }}>paid</p>
             }
-
           </div>
-          //   params.row.paymentStatus!=='paid'?'pending':'paid'
-
         );
       },
     },
     {
       field: "requestedBy", headerName: "requestedBy", width: 100,
       renderCell: (params) => {
-        return (
-          <p className="productListItem">
-            {params.row.requestedBy}
-          </p>
-        );
+        return (<p className="productListItem">{params.row.requestedBy}</p>);
       },
     },
     {
       field: "clientName", headerName: "clientName", width: 100,
       renderCell: (params) => {
-        return (
-          <p className="productListItem">
-            {params.row.clientName}
-          </p>
-        );
+        return (<p className="productListItem">{params.row.clientName}</p>);
       },
     },
     //------------------------------------------------------
@@ -181,7 +163,7 @@ const FinanceUser = () => {
       },
     },
     {
-      field: "withdrowal", headerName: "withdrowal", width: 100,
+      field: "withdrawal", headerName: "withdrawal", width: 100,
       renderCell: (params) => {
         return (
           <p className="productListItem" style={{ color: `${params.row.storeStatus === 'out' ? 'green' : 'red'}` }}>
@@ -205,11 +187,21 @@ const FinanceUser = () => {
       },
     },
     {
-      field: "model", headerName: "model No.", width: 130,
+      field: "model", headerName: "model No.", width: 100,
       renderCell: (params) => {
         return (
           <div className="productListItem">
             {`${params.row.modelNo}`}
+          </div>
+        );
+      },
+    },
+    {
+      field: "company", headerName: "company", width: 100,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            {`${params.row.company}`}
           </div>
         );
       },
@@ -229,7 +221,7 @@ const FinanceUser = () => {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {`${Number(params.row.sellingPrice).toFixed(2)}`}
+            {`${params.row.sellingPrice}`}
           </div>
         );
       },
@@ -264,7 +256,7 @@ const FinanceUser = () => {
           </div>
           <DataGrid
             style={{ height: '60vh' }}
-            rows={items.map((value, idx) => {
+            rows={bothCompanyItems.map((value, idx) => {
               let id = idx + 1;
               return { ...value, id };
             })}

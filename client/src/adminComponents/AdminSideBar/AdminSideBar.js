@@ -1,4 +1,7 @@
 import "./adminSideBar.css";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
+import UpdateIcon from '@mui/icons-material/Update';
 import {
 
   LineStyle,
@@ -58,15 +61,34 @@ const AdminSideBar = () => {
             </Link>
             <Link to="/admin/editProducts" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
+                <UpdateIcon className="sidebarIcon" />
                 Edit Prod.
               </li>
             </Link>
             
-            <li className="sidebarListItem">
+            {/* <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               Transactions
-            </li>
+            </li> */}
+            
+            <Link to="/request" className="link">
+              <li className="sidebarListItem">
+                <AddShoppingCartIcon className="sidebarIcon" />
+                Request
+              </li>
+            </Link>
+            <Link to="/finance" className="link">
+              <li className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                Finance
+              </li>
+            </Link>
+            <Link to="/store" className="link">
+              <li className="sidebarListItem">
+                <StoreIcon className="sidebarIcon" />
+                Store
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports

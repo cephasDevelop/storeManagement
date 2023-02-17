@@ -55,7 +55,9 @@ export const deleteUser = (id) => API.delete(`deleteUser/${id}`);
 export const makeRequest = (requestObject) => API.post(`makeRequest/`, { ...requestObject });
 export const getAllRequested = () => API.get(`requestedtems`);
 export const cancelRequest = ({ selfId, fromMongoId }) => API.delete(`delete-request/${selfId}`);
-export const makePayment = (payload) => API.put(`payment-request/${payload.id}`, payload);
+export const makePayment = (payload) => API.put(`paymentRequest/${payload.id}`, payload);
+
+export const makeindividualPayments = (obj) => API.put(`individualPayments`,obj);
 
 export const createHistory = (payloadHist) => { 
     console.log('API HISTORY DATA');

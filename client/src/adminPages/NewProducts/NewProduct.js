@@ -44,10 +44,12 @@ const NewProduct = () => {
       //dispatch to KMikedem
       dispatch(postKMikedem({...dataToDispatch}));
     };
+    
     if (postItems.company === 'KKGW') { 
       // dispatch to KKGW
       dispatch(postKKGW({...dataToDispatch}));
     };
+
     dispatch(postItem({...dataToDispatch}));
     dispatch(purchasedItem({...dataToDispatch}));
     handleClear();
