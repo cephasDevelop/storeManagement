@@ -28,7 +28,6 @@ const NewProduct = () => {
     })
   }
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const storedDate = new Date().toISOString();
