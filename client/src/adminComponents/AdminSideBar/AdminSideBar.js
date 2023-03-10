@@ -119,7 +119,7 @@ const AdminSideBar = () => {
               <WorkOutline className="sidebarIcon" />
               Profile
             </li> */}
-            <li className="sidebarListItem">
+            <li className="sidebarListItem" onClick={() => navigate('/change-password')}>
               <Password className="sidebarIcon" />
               Change Password
             </li>

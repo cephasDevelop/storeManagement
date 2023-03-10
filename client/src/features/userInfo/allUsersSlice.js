@@ -7,7 +7,8 @@ const initialState = {
     allUsers: [],
     deleteStatus: '',
     updateStatus: '',
-    error: ''
+    error: '',
+    
 };
 
 export const fetchUsers = createAsyncThunk('allUsers/fetchUsers', async (_, { rejectWithValue}) => {
@@ -38,7 +39,7 @@ export const updateUser = createAsyncThunk('allUsers/updateUser', async({id,acti
         return response.data;
     } catch (error) {
         console.log("login actions api .... error")
-        console.log(error)
+        // console.log(error)
         return rejectWithValue(error.response.data);
     }
 });
@@ -79,14 +80,16 @@ const allUsersSlice = createSlice({
         
         builder.addCase(updateUser.pending, (state) => {
             state.loading = true;
+            
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {
             state.loading = false;
             state.updateStatus = 'updated';
+            
         });
         builder.addCase(updateUser.rejected, (state,action) => {
             state.loading = false;
-            state.error = action.error.message;
+            state.error = action.error.message;            
          });
     }
 });
