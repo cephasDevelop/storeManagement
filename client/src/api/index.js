@@ -30,7 +30,7 @@ export const getAllCompanyItemsData = () => API.get(`getAllCompanyItemsData`);
 
 // api regarding the purchased product list
 export const getAllProductListData = () => API.get(`getAllProductListData`);
-export const editProductListData = (obj) => API.put(`editProduct/${obj.id}`, { ...obj });
+export const editProductListData = (obj) => API.post(`editProduct/${obj.id}`, { ...obj });
 export const deleteProductListData = (obj) => {
     return API.put(`deleteProduct/${obj.id}`, { ...obj });
 };
@@ -53,6 +53,8 @@ export const depositePendingChecks = (id) => API.delete(`depositeCheck/${id}`);
 
 
 
+export const changePassword = (data) => API.post(`changepassword`,data);
+export const forgotPassword = (data) => API.post(`forgotpassword`,data);
 export const logIn = (loginData) => API.post(`login`,loginData);
 export const signUp = (signupData) => API.post(`signupforadmin`, signupData);
 export const updateUserData = (id,active) => API.patch(`updateUser/${id}`, {active});

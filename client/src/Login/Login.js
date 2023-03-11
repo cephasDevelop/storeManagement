@@ -7,7 +7,7 @@ import {
 import {Visibility,VisibilityOff} from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loginUser } from '../features/userInfo/signUpInSlice.js';
 
@@ -27,9 +27,13 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const visible = useSelector(state => state.userAdded.incorrect);
+
   const [loginData, setLoginData] = useState({ firstName: '', department: '',company:'', email: '', password: '' });
 
   const [showPassword, setShowPassword] = useState(false);
+
+  // const [incorrectPassword, setIncorrectPassword] = useState(false);
 
   const handleClearInfo = () => setLoginData({ firstName: '', department: '',company:'', email: '', password: '' });
   
@@ -44,7 +48,6 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("loginData = ",loginData)
     dispatch(loginUser({loginData,navigate}));
     handleClearInfo();
   }
@@ -150,16 +153,17 @@ const Login = () => {
                       }  
                     />
                   </FormControl>
-                  <Button variant='contained' color='primary' size='large' fullWidth onClick={() => navigate('/show-data')}>Navigate Data</Button>
+                  {/* <Button variant='contained' color='primary' size='large' fullWidth onClick={() => navigate('/show-data')}>Navigate Data</Button> */}
                   <Button variant='outlined' color='secondary' size='large' type='submit' fullWidth>Sign-In</Button>
                   <div className='forgot-password'>
                   <Typography variant='body1' align='center' color='primary'
                     style={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '14px' }}
-                    onClick={() => console.log('FORGOT PASS-WORD')}>forgot password ?
+                    onClick={() => navigate('/forgotpassword')}>forgot password ?
                   </Typography>
                   </div>
                 </form>
               </Paper>
+                <p id='incorrect' style={{display: visible ? 'block' : 'none', color:'red', textAlign: 'center'}}>Wrong Password</p>
             </Grid>
           </Grid>
         </Container>
