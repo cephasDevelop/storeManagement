@@ -19,7 +19,7 @@ export const login = async (req, res) => {
         console.log('found the user fron DB - ', user);
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         
-        if (!isPasswordCorrect)return res.status(400).json({message:'Password not correct'});
+        if (!isPasswordCorrect)return res.status(400).send({message:'Password not correct'});
         
         const token = jwt.sign({
             name: `${user.firstName}${user.lastName}`,

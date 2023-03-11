@@ -25,21 +25,23 @@ import StoreUser from './StoreUser/Store';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
+import ForgotPassword from './forgotPassword/forgotPassword';
 
 import EditProducts from './adminPages/EditProduct/EditProducts.js';
+import ChangePassword from './changePassword/ChangePassword';
 
 function App() {
   return (
     <div style={{minHeight:'100vh'}}>
       <Routes>
         <Route path='/' element={<MainHome />}/>
-        {/* <Route path='admin' element={<Administrator />}/> */}
+        <Route path='change-password' element={<ChangePassword />}/>
         <Route path='data-in' element={<Form />} />
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
         <Route path='signUp' element={ <SignUp/>}/>
 
-        {/* <Route path='adminPage' element={ <Admin/>}/> */}
+        <Route path='forgotpassword' element={ <ForgotPassword/>}/>
 
         <Route path='products' element={ <ProductList/>}/>
         <Route path='product/:productId' element={ <Product/>}/>
