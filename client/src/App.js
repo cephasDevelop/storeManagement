@@ -25,7 +25,7 @@ import StoreUser from './StoreUser/Store';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
-
+import FinancePending from './FinanceUser/FinancePending.js';
 import EditProducts from './adminPages/EditProduct/EditProducts.js';
 
 function App() {
@@ -50,6 +50,7 @@ function App() {
         <Route path="admin/employees" element={<Employees />} />
         <Route path="request" element={<RequestUser />} />
         <Route path="finance" element={<FinanceUser />} />
+        <Route path="finance-pending" element={<FinancePending />} />
         <Route path="store" element={<StoreUser />} />
         <Route path="admin/editProducts" element={<EditProducts />} />
 

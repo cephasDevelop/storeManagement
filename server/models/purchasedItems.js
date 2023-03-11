@@ -52,11 +52,11 @@ const PurchasedItemsSchema = mongoose.Schema({
         {
             payerName: String,
             financeName: String,
-            paymentType: String,// check or cash
-            checkExpiresAt: String,// Date of check expiration
+            paymentType: String, // check or cash
+            checkExpiresAt: String, // Date of check expiration
             invoiceNo: String,
             checkNo: String,
-            // checkDiposited:String,// when money is recieved it will be true, else false
+            // checkDiposited:String, // when money is recieved it will be true, else false
             requestNumber: String,
             requestedBy:String,
             
@@ -66,6 +66,15 @@ const PurchasedItemsSchema = mongoose.Schema({
             amountPurchased:String,
             datePaid: String,
         },
+    ],
+
+    storeDetail: [
+        {
+            storePerson: String,
+            outQty: String,
+            outDate: String,
+            storeFormNo:String,
+        }
     ],
     storedDate: {
         type: Date,

@@ -6,21 +6,37 @@ import WidgetTransaction from "../../adminComponents/widgetTransaction/WidgetTra
 import WidgetUsers from "../../adminComponents/widgetUsers/WidgetUsers";
 import AdminNavBar from "../../adminComponents/adminNavBar/AdminNavBar";
 import AdminSideBar from "../../adminComponents/AdminSideBar/AdminSideBar";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getListOfPurchasedProducts } from '../../features/companySlice/productListSlice.js';
+import { getPendingChecks } from '../../features/checkPending/checkPendingSlice';
 
 const AdminHome = () => {
+  const dispatch = useDispatch();
   const [visibility, setVisibility] = useState(true);
+  const date = new Date();
+  const purchasedItems = useSelector(state => state.purchasedProductsList.allProductsList);
+  const checkPendings = useSelector(state => state.check.checkPendings);
+  
+  
+  useEffect(() => { 
+    dispatch(getListOfPurchasedProducts());
+    dispatch(getPendingChecks());
+    dispatch();
+  },[dispatch]);
   
    return (
     <>
       <AdminNavBar visibility = {visibility} setVisibility={setVisibility}/>
-      <div className="adminHome">        
+      <div className="adminHome">
         {visibility && <AdminSideBar />}
-        <div className="home">        
-          <FeaturedInfo />
+        <div className="home">
+           <FeaturedInfo obj={purchasedItems} month={date.getMonth()} objCheck={ checkPendings} />
           <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>
           <div className="homeWidgets">
-            <WidgetUsers />
+             <WidgetUsers />
+             {/* <h1>Length={ purchasedItems.length}</h1> */}
             <WidgetTransaction/>
           </div>
         </div>
