@@ -17,6 +17,9 @@ import kkgwRoutes from './routes/kkgwRoutes.js';
 import kmikedemRoutes from './routes/kmikedemRoutes.js';
 
 import companyRoutes from './routes/companyRoutes.js';
+import storeRoutes from './routes/storeRoutes.js';
+
+import checkRoutes from './routes/checkRoutes.js';
 
 import forgotPassword from './routes/forgotPassword.js';
 // import { renderFile } from 'ejs';
@@ -46,7 +49,7 @@ app.use('/api/form/', itemRoutes);
 app.use('/api/formPurchasedItems/', productRoutes);
 app.use('/api/getAllProductListData/', productRoutes);
 app.use('/api/deleteProduct/', productRoutes);
-
+// getAllProductListData
 
 // for kkgw company
 app.use('/api/postKkgwItem/', kkgwRoutes);
@@ -61,7 +64,11 @@ app.use('/api/getAllCompanyItemsData/', companyRoutes);
 app.use('/api/editProduct/', companyRoutes);
 
 
+app.use('/api/getStorePendingItems/',storeRoutes);
+app.use('/api/withdrawItems/',storeRoutes);
 
+app.use('/api/pendingCheck/',checkRoutes);
+app.use('/api/depositeCheck/',checkRoutes);
 
 app.use('/api/login/', loginRoutes);
 app.use('/api/allUsers/', loginRoutes);
@@ -76,8 +83,7 @@ app.use('/api/requestedtems/', requestRoutes);
 app.use('/api/delete-request/', requestRoutes);
 
 app.use('/api/paymentRequest/', paymentRoutes);
-app.use('/api/individualPayments',historyRoutes);
-
+app.use('/api/individualPayments/',historyRoutes);
 
 app.use('/api/historyCreate/', historyRoutes);
 

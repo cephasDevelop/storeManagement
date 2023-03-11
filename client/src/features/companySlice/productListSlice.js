@@ -4,7 +4,6 @@ import {
     deleteProductListData, makeindividualPayments
 } from '../../api/index.js';
 
-
 const initialState = {
     loading: false,
     allProductsList:[],
@@ -14,7 +13,7 @@ const initialState = {
 export const getListOfPurchasedProducts = createAsyncThunk('allProductsList/getListOfPurchasedProducts', async(_, { rejectWithValue}) => {
     try {
         const response = await getAllProductListData();
-        console.log('All product list = ',response.data);
+        console.log('purchased product list = ',response.data);
         return response.data;
     } catch (error) {
         console.log("get all product list actions api .... error")

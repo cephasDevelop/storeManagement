@@ -25,7 +25,9 @@ import StoreUser from './StoreUser/Store';
 import RequestUser from './RequestUser/RequestUser';
 import FinanceUser from './FinanceUser/FinanceUser';
 import MainHome from './MainHome/MainHome';
-import ForgotPassword from './forgotPassword/forgotPassword';
+
+import FinancePending from './FinanceUser/FinancePending.js';
+import ForgotPassword from './forgotPassword/forgotPassword.js';
 
 import EditProducts from './adminPages/EditProduct/EditProducts.js';
 import ChangePassword from './changePassword/ChangePassword';
@@ -52,6 +54,7 @@ function App() {
         <Route path="admin/employees" element={<Employees />} />
         <Route path="request" element={<RequestUser />} />
         <Route path="finance" element={<FinanceUser />} />
+        <Route path="finance-pending" element={<FinancePending />} />
         <Route path="store" element={<StoreUser />} />
         <Route path="admin/editProducts" element={<EditProducts />} />
 

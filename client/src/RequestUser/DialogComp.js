@@ -170,26 +170,3 @@ export default function AlertDialogSlide({item, idPassed,status,comment, changeS
     </div>
   );
 }
-
-// {/* <form autoComplete='off' noValidate onSubmit={(e) => handleAgree(e)}>
-            
-//             <TextField id='requestQty' type='text' name='requestQty' variant='outlined'
-//               label='Qty requested' xs={12} sm={12} fullWidth
-//               value={request.requestQty} onChange={(e)=>setRequest({...request,requestQty:e.target.value})} />
-            
-//             <TextField id='requestNumber' type='text' name='requestNumber' variant='outlined'
-//               label='Request No.' xs={12} sm={12} fullWidth
-//               value={request.requestNumber} onChange={(e)=>setRequest({...request,requestNumber:e.target.value})} />
-            
-//             <TextField id='clientName' type='text' name='clientName' variant='outlined'
-//               label='Client Name' xs={12} sm={12} fullWidth
-//               value={request.clientName} onChange={(e)=>setRequest({...request,clientName:e.target.value})} />
-            
-//               {(request.requestQty > item.qty) &&
-//               <p style={{ color: 'red' }}><em>{comment}</em></p>
-//             }
-//             <DialogActions>
-//               <Button onClick={handleClose}>Disagree</Button>
-//               <Button type='submit'>Agree</Button>
-//             </DialogActions>
-//           </form> */}

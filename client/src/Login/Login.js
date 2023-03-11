@@ -19,7 +19,7 @@ const departmentNames = [
   'store',
   'user'
 ];
-const companyNames = ['KMikedem','KKGW'];
+// const companyNames = ['KMikedem','KKGW'];
 
 
 const Login = () => {
@@ -48,7 +48,6 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login: ", loginData);
     dispatch(loginUser({loginData,navigate}));
     handleClearInfo();
   }
@@ -62,7 +61,7 @@ const Login = () => {
               <Paper>
                 <form autoComplete='off' noValidate onSubmit={handleSubmit}>
                   <Typography variant='h6' align='center' color='primary'>Log in</Typography>
-                  <FormControl fullWidth>
+                  {/* <FormControl fullWidth>
                     <InputLabel id="select-company">select company name</InputLabel>                      
                     <Select
                       name='company'
@@ -80,19 +79,21 @@ const Login = () => {
                       }}
                       inputProps={{ 'aria-label': 'Without label' }}
                     >
-                      <MenuItem disabled value="">
-                        <em>select company name</em>
-                      </MenuItem>
-                      {companyNames.map((name) => (
-                        <MenuItem
-                          key={name}
-                          value={name}
-                        >
-                          {name}
-                        </MenuItem>
-                      ))}
+                      <MenuItem disabled value="">select company name</MenuItem>
+                      <MenuItem value="KMikedem">KMikedem</MenuItem>
+                      <MenuItem value="KKGW">KKGW</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
+                  {/* <label htmlFor="select company name">select company name:</label> */}
+                  <select name="company" style={{width:"100%",height:"3.5rem"}}
+                    id="select company name"
+                    onChange={handleChange}>
+                      <option value="" style={{color:'red',height:"3rem"}}>--select company name--</option>
+                      <option value="KMikedem">KMikedem</option>
+                      <option value="KKGW">KKGW</option>
+                  </select>
+
+                  
                   <FormControl fullWidth>
                     <InputLabel id="select-label">select department</InputLabel>                      
                     <Select

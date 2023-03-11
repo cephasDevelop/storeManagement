@@ -4,14 +4,11 @@ import KmikedemData from '../models/kmikedemModel.js';
 import KkgwData from '../models/kkgwModel.js';
 import ItemData from "../models/itemData.js";
 import RequestData from '../models/requestData.js';
+import CheckPendingData from "../models/checkPendingModel.js";
+import StorePendingData from "../models/storePendingItemsModel.js";
 
 // import mongoose from "mongoose";
 // import Joi from 'joi';
-
-// if (!mongoose.Types.ObjectId.isValid(singleProduct._id)) {
-            //     console.log("ID NOT MONGOOSE BREAK");
-            //     continue;
-            // };
 
 export const individualPayments = async (req, res) => {
     try {
@@ -116,6 +113,40 @@ export const individualPayments = async (req, res) => {
         if (itemDb) {
             itemObj = { ...companyObj, qty: String(Number(itemDb.qty)-Number(body.paidQty)) };
             await ItemData.findOneAndReplace({ modelNo: body.modelNo }, {...itemObj}, { new: true });
+        };
+        // TO SORE PENDING DATA BASE
+        const storeArray = {
+            modelNo: body.modelNo,company: body.company,
+            productType: body.productType,productBrand: body.productBrand,
+            
+            requestNumber: body.requestNumber,requestedBy: body.requestedBy,requestDate: body.requestDate,
+
+            payerName: body.payerName,paymentProcessedBy: body.paymentProcessedBy,paymentType: body.paymentType,
+
+            checkNo: body.checkNo,checkExpiresAt: body.checkExpiresAt,invoiceNo: body.invoiceNo,
+            invoiceDate: body.invoiceDate,priceUsed: body.priceUsed,paidQty: body.paidQty,
+            datePaid: body.paymentdate,
+            qtyToWithdraw:body.paidQty
+        };
+        let storeInfo = new StorePendingData({ ...storeArray });
+        await storeInfo.save();
+
+        // WHEN PAYMENT TYPE IS CHECK -- CREATE CHECK PENDING DATA --
+        if (body.paymentType === 'check') {
+            const checkPendingArray = {
+                modelNo: body.modelNo,company: body.company,
+                productType: body.productType,productBrand: body.productBrand,
+                
+                requestNumber: body.requestNumber,requestedBy: body.requestedBy,requestDate: body.requestDate,
+
+                payerName: body.payerName,paymentProcessedBy: body.paymentProcessedBy,paymentType: body.paymentType,
+
+                checkNo: body.checkNo,checkExpiresAt: body.checkExpiresAt,invoiceNo: body.invoiceNo,
+                invoiceDate: body.invoiceDate,priceUsed: body.priceUsed,paidQty: body.paidQty,
+                datePaid: body.paymentdate,isDeposited: 'false'
+            };
+            let newInfo = new CheckPendingData({ ...checkPendingArray });
+            await newInfo.save();
         };
 
         console.log("payments info is written");

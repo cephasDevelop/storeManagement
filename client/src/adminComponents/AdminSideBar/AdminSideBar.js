@@ -1,7 +1,9 @@
 import "./adminSideBar.css";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import StoreIcon from '@mui/icons-material/Store';
+// import StoreIcon from '@mui/icons-material/Store';
 import UpdateIcon from '@mui/icons-material/Update';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import {
 
   LineStyle,
@@ -83,12 +85,19 @@ const AdminSideBar = () => {
                 Finance
               </li>
             </Link>
-            <Link to="/store" className="link">
+            <Link to="/finance-pending" className="link">
               <li className="sidebarListItem">
-                <StoreIcon className="sidebarIcon" />
-                Store
+                <AssuredWorkloadIcon className="sidebarIcon" />
+                Check-Pending
               </li>
             </Link>
+            <Link to="/store" className="link">
+              <li className="sidebarListItem">
+                <RemoveShoppingCartIcon className="sidebarIcon" />
+                Store-Active
+              </li>
+            </Link>
+            
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
