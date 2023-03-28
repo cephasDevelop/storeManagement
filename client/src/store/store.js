@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// import reducers
 import itemReducer from '../features/items/itemSlice.js';
 import formReducer from '../features/itemForm/itemFormSlice.js';
 import signupReducer from '../features/userInfo/signUpInSlice.js';
@@ -12,6 +11,8 @@ import kmikedemReducer from '../features/companySlice/kmikedemSlice.js';
 
 import companyReducer from '../features/companySlice/companySlice.js';
 import productListReducer from '../features/companySlice/productListSlice.js';
+import storePendingSlice from '../features/storePending/storePendingSlice.js';
+import checkPendingSlice from '../features/checkPending/checkPendingSlice.js';
 
 const store = configureStore({
     reducer: {
@@ -26,7 +27,10 @@ const store = configureStore({
         kmikedemItem: kmikedemReducer,
         
         totalCompanyItems:companyReducer,
-        purchasedProductsList:productListReducer,
+        purchasedProductsList: productListReducer,
+        
+        atStore: storePendingSlice,
+        check:checkPendingSlice,
     }
 });
 

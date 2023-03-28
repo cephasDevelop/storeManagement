@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { makeHistory,individualPayments } from '../controllers/history.js';
+import { makeHistory,individualPayments } from '../controllers/payments.js';
 
 const router = express.Router();
 

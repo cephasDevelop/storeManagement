@@ -36,12 +36,21 @@ const RequestSchema = mongoose.Schema({
     paymentStatus: {type:String,default:''},
     amountRecieved:String,
     
-    storeManName: String,
-    dateOut: String,
+    
     storeStatus: {
         type: String,
         default:''
-    }
+    },
+    
+    inStoreQty:String,
+    storeDetail: [
+        {
+            storePerson: String,
+            outQty: String,
+            outDate: Date,
+            storeFormNo:String,
+        }
+    ],
 });
 
 const RequestData = mongoose.model('RequestData', RequestSchema);
