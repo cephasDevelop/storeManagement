@@ -39,7 +39,7 @@ function App() {
         <Route path='show-data' element={<ShowData />} />
         <Route path='signUp' element={ <SignUp/>}/>
 
-        {/* <Route path='adminPage' element={ <Admin/>}/> */}
+        {/* <Route path='adminPage' element={ <Admin/>}/> */}        
 
         <Route path='products' element={ <ProductList/>}/>
         <Route path='product/:productId' element={ <Product/>}/>
