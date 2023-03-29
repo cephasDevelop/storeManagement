@@ -31,6 +31,7 @@ import ForgotPassword from './forgotPassword/forgotPassword.js';
 
 import EditProducts from './adminPages/EditProduct/EditProducts.js';
 import ChangePassword from './changePassword/ChangePassword';
+import ProductDetail from './productDetail/ProductDetail';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
 
         <Route path='products' element={ <ProductList/>}/>
         <Route path='product/:productId' element={ <Product/>}/>
+        <Route path='product/productdetail/:productId' element={ <ProductDetail/>}/>
         <Route path='newProduct' element={ <NewProduct/>}/>
 
         <Route path="admin" element={<AdminHome />} />

@@ -23,7 +23,7 @@ const AdminHome = () => {
   useEffect(() => { 
     dispatch(getListOfPurchasedProducts());
     dispatch(getPendingChecks());
-    dispatch();
+    // dispatch();
   },[dispatch]);
   
    return (
