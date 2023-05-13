@@ -33,7 +33,7 @@ export const forgotPassword = async (req, res) => {
           id: user._id
         }
 
-        const token = jwt.sign(payload, secret, { expiresIn: '15m' });
+        const token = jwt.sign(payload, secret, { expiresIn: '1h' });
 
         const link = `http://localhost:${process.env.PORT}/api/resetpassword/${user._id}/${token}`;
 
@@ -51,7 +51,7 @@ export const forgotPassword = async (req, res) => {
           from: process.env.SENDER_EMAIL,
           to: user.email,
           subject: 'Password reset',
-          text: link
+          text: `Please click the link below to reset your password.\n This link will expire in 1 hour.\n ${link}`
         };
 
         transporter.sendMail(mailOptions, function(error, info){

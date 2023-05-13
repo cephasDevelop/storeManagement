@@ -34,8 +34,8 @@ const AdminNavBar = ({visibility, setVisibility}) => {
   //   // name = getNameForAvatar();
     
   // }, []);
-  const name = JSON.parse(localStorage.getItem("profile")).result;
-    fullName = `${name?.firstName} ${name?.lastName}`;
+  const name = JSON.parse(localStorage.getItem("profile"))?.result;
+    fullName = `${name?.firstName} ${name.lastName}`;
 
   
   return (
