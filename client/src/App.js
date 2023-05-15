@@ -32,10 +32,13 @@ import ForgotPassword from './forgotPassword/forgotPassword.js';
 import EditProducts from './adminPages/EditProduct/EditProducts.js';
 import ChangePassword from './changePassword/ChangePassword';
 import ProductDetail from './productDetail/ProductDetail';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function App() {
   return (
-    <div style={{minHeight:'100vh'}}>
+    <div>
+    
       <Routes>
         <Route path='/' element={<MainHome />}/>
         <Route path='change-password' element={<ChangePassword />}/>
@@ -43,6 +46,8 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='show-data' element={<ShowData />} />
         <Route path='signUp' element={ <SignUp/>}/>
+        <Route path='forgotpassword' element={ <ForgotPassword/>}/>
+        
 
         {/* <Route path='adminPage' element={ <Admin/>}/> */}        
 
@@ -59,11 +64,12 @@ function App() {
         <Route path="finance-pending" element={<FinancePending />} />
         <Route path="store" element={<StoreUser />} />
         <Route path="admin/editProducts" element={<EditProducts />} />
-
-
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
       </Routes>
+    
     {/* <Footer /> */}
-    </div>
+    </div> 
   );
 }
 

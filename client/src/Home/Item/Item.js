@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
 
-const Item = ({item}) => {
+const Item = ({item, handleClick}) => {
   return (
-    <Card elevation={ 6} xs={6} sm={3} style={{margin:0, maxHeight:220}}>
+  <Grid item xs={6} sm={3} lg={2} style={{padding:"1%"}}>
+
+    <Card elevation={6} xs={6} sm={3} style={{margin:0, maxHeight:270}} onClick={() => handleClick(item._id)}>
       <CardMedia
               component="img"
               alt={ item.ProductName}
-              style={{height:140}}
+              style={{height:200}}
               image={ item.image}
       />
       <CardContent>
@@ -18,6 +20,8 @@ const Item = ({item}) => {
 
       </CardContent>
     </Card>
+   </Grid>
+
   )
 }
 

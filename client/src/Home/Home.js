@@ -20,13 +20,13 @@ const Home = () => {
       console.log(id);
     }
   return (
-    <Container style={{marginTop:'30px'}}>
+    <Container style={{marginTop:'57px',padding:"0%", minHeight: '90vh', minWidth: '100vw'}}>
         <Grow in>
-          <Grid container justify='space-between' spacing={1} style={{minHeight:'100vh'} }>
+          <Grid container justify='space-between' spacing={3} style={{ paddingLeft: '20px', paddingRight: '20px'} }>
                         {!items.length ? <CircularProgress/>:(items.map((item,idx) => (
-                        <Grid key={item._id} item justify="space-between" xs={6} sm={ 3} onClick={() => {handleClick(item._id)}}>
-                          <Item key={idx} item={item} />
-                        </Grid>
+                        // <Grid key={item._id} item justify="space-between" xs={6} sm={ 3} style={{backgroundColor: 'blue'} }>
+                          <Item key={idx} item={item} handleClick = {handleClick}/>
+                        // </Grid>
                         )))}
           </Grid>
         </Grow>

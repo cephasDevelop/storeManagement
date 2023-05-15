@@ -23,7 +23,7 @@ export default function FeaturedInfo({ obj,objCheck,month }) {
     },0));
   }, 0);
   const cost = obj.reduce((acc, item) => { 
-    return acc + Number(item.qty) * Number(item.priceUsed)
+    return acc + Number(item.qty) * Number(item.purchasePrice)
   },0);
 
   return (
